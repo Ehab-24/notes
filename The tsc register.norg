@@ -1,0 +1,15 @@
+** Usage
+   @code rust
+   pub fn measure_clock_cycles<F>(process: F) -> u64
+where F: FnOnce(),
+   {
+      let start_tsc = unsafe { _rdtsc() };
+      process();
+      unsafe { _rdtsc() } - start_tsc
+   }
+   @end
+
+** References
+   - [1] [Time Stamp Counter - Wikipedia]{https://lnkd.in/dpzvVd-v}
+   - [2] [rust-lang]{https://lnkd.in/dqMfh7Rk}
+   - [3] [RESET AND INTERRUPTS - University of Petra]{https://lnkd.in/dYwYWnrk}

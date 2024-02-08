@@ -1,0 +1,6 @@
+
+* CLI 
+  - [Getting Started Guide]{https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html}
+
+* Lambda Functions
+  - [Deploy Lambda functions with container images]{https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/deploy-lambda-functions-with-container-images.html}

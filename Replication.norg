@@ -1,0 +1,205 @@
+
+* Replication - page 151
+
+** Types - page 153
+*** Asynchronous 
+    - data is replicated on all nodes asynchronously
+*** Synchronous
+    - configurable option in most SQL databases
+    - data is replicated on synchronously on one follower, other followers are still asynchronously
+    -- this ensures that there is always two nodes with up-to-date data---leader and synchronous follower
+    - leader waits for synchronous follower to replicate data before responding to client 
+    - all followers may not be synchronous because failuer of one will halt the system
+    - if a synhronous follower fails or becomes slow, another follower is made synchronous
+
+** Single-Leader
+
+** Multi-Leader - page 168
+
+*** Advantages
+    - mainly in multi-datacenter deployments
+    - clients with offline operations - page 170
+    -- client writes to local database (acting as leader), local leader asynchronously wirtes to remote database when internet connection is available, i.e; each device acts as leader + the system has extremely unreliable network links
+    -- Example: calender app for managing meetings and that
+    > There are tools that aim to make this kind of multi-leader configuration easier. For example, CouchDB is designed for this mode of operation [29].
+    - collaborative editing
+    -- has most of the same problems as multi-leader replication
+    -- each local browser/application acts as a leader
+    -- writes are processed by first acquiring lock on document to be edited
+    ---  only a single user may hold a lock on a document at any given time
+
+
+*** Downsides
+    - considered dangerous territory
+    - should be avoided if possible - page 170
+    - {*** Write Conflicts}
+
+*** Tools
+    - Tungsten Replicator for MySQL [26]
+    - BDR for PostgreSQL [27]
+    - GoldenGate for Oracle [19]
+
+*** Comparison with Single-Leader Replication in Multi-datacenter Deployment
+**** Performance
+     - single-leader:
+     -- writes to leaders in other data-centers are syncrhounous, making them slow
+     - multi-leader:
+     -- writes to other leaders are asynchronous, therefore, perceived by client as fast
+**** Tolerance of datacenter outages
+     - single-leader: failover may promote a follower in another datacenter to become leader
+     - multi-leader: each data-center works independently and catches up when it becomes online after a failover
+**** Tolerance for network problems
+     - single-leader:  sensitive to inter-datacenter link
+     - multi-leader: tolerates network issues better, a temporary network interruption does not prevent the processing of writes
+
+
+*** Write Conflicts
+**** Handling Write Conflicts
+***** Converging towards a Consistent State
+      ~ Give each write a unique ID, write with higher ID wins the conflict
+      -- ID may be:
+      --- timestamp
+      --- UUID
+      --- hash
+      --- long rnadom number
+      -- known as /Last Write Wins/ (LWW)
+      -- prone to data loss
+      ~ Give each replica a unique ID, writes originating from higher ID take precedence
+      ~ Merge values of both writes
+      ~ Record all conflict information in an explicit data structure. (Kinda like version control)
+      -- application code resolves conflicts at a later time
+
+***** Custom conflict resolution
+      - *On write:* run a code (developer written) snippet as soon as a conflict occurs
+      - *On read:* store all writes on a conflict, application resolves these conflicts at a later time
+      > Applies to indivual writes and not entire transactions
+
+***** Automatic conflict resolution
+      - Conflict-free Replicated Datatypes (CRDTs)
+
+*** Multi-leader Replication Topologies - page 175
+    - *Circular:*
+    -- simplest topology
+    -- one node failure may interrupt the replication message flow
+    --- most systems will require a manual workaround to handle this
+    - *Star:*
+    -- one node failure may interrupt the replication message flow
+    --- most systems will require a manual workaround to handle this
+    - *All-to-all:*
+    -- a node may receive writes in th e wrong order
+    --- can be solved using /version vectors - page 184/
+
+** Leaderless - page 177
+   - *Riak*, *Cassandra*, and *Voldemort* are ope source datastores that use leaderless replication
+   -- inspired by Amazons in-house Dynamo system
+   - also know as /Dynamo-style/
+   - coordinator node coordinates writes but dos not impose a strict ordering
+
+*** Write
+    ~ client sends write requests to multiple nodes in parallel
+    ~ write is considered a success if most of the replicas accept the request
+
+*** Read
+    ~ client sends reads requests to multiple replicas
+    ~ it may recieve different (stale and up-to-date) versions of the data
+    ~ newer version is accepted by the help od /version numbers/
+    
+*** Eventual consistency
+    ~ Read repairs - page 179
+    -- client can detect a stale replica on read, and then write the new value to that replica
+    ~ Anti-entropy process - page 179
+    -- used in addition to /Read repairs/
+    -- a background process repairs looks for differences between replicas
+
+
+** Setting up a new follower - page 155
+   - Take a consistent snapshot of the leader's database. This feature is available in most databases, if not, use a 3rd-aprty tool like /innobackupex/.
+   - copy snapshot to new node
+   - connect new node to leader and request all changes since the snapshot, use a unique identifier for the snapshot's position in log (log sequence number in Postgres, binlog coordinates in MySQL)
+   - when the new node has processed the backlog since the snapshot, we say it has caught up
+
+** Node Outages - page 156
+*** Catch-up recovery
+    when a follower fails
+    - simply request all changes from leader since the last known position
+*** Failover
+    when leader fails
+    - clients need to be reconfigured to follow a different leader
+    - recovery can be manual or automatic
+    -- manual: admin comes and configures a new leader
+    -- automatic:
+    ~~~ determine that the leaderhas failed
+    ~~~ elect a new leader
+    ~~~ reconfigure the system to use the new leader
+
+** Implementation of Replication Logs - page 159
+*** Statement-based replication
+    - leader logs every write request (statement) and sends it to followers
+*** Write-ahead log (WAL)
+    - leader writes every change to a log (WAL) before writing to database
+    - can be implemented in two ways:
+    ~~ log-structured storage engines (SSTables and LSM-trees)
+    --- log is the main place for storage
+    --- log segments are compacted and garbage collected in the background
+    ~~ B-Trees 
+    --- overwrites indivual disk blocks
+    --- every modification is first written to a WAL 
+*** Logical (row-based) log replication
+    - use different log formats for replication and storage engine
+**** Advantages
+     - easy to keep backward compatibility
+     - leader and followers may run different versions of the database software or use different storage engines
+     - logical format is easier for external applications to parse
+*** Trigger-based replication
+    - /triggers/ and /stored procedures/ are available as a feature in many relational databases
+    - trigger lets you run custom application code in response to data changes
+    -- e.g a trigger can log a change to a separate table, an external process can then read this log and replicate the data change to another system
+    - provides flexibility
+    - has more overhead and more prone to bugs & limitations than built-in replication
+
+** Replication Lag - pag 161
+   - the delay between a write happening on the leader and being reflected on a follower
+*** Problems
+**** Reading your own writes
+***** Solutions
+      ~ read only user editable information from leader
+      ~ for `x` seconds after a write, read from leader
+      ~ client can remember /timestamp/ OR /log sequence number/ of most recent write
+      -- if a replica isn't up-to-date, read from another replica or wait until it is up-to-date
+      ~ For user's using multiple devices:
+      -- need to centralized metadata (e.g timestamp of last write)
+      -- if replicas are distributed across different data-centers, route all user requests (from all devices) to the same datacenter
+      --- /*<my thoughts>*/ hash based load balancing could work
+
+**** Monotonic reads
+     - client may see things moving backwards in time, i.e read from a fresh replica, then from a stale replica
+***** Solutions
+      ~ a client always reads from the same replica (use user ID as hash key)
+      -- on failure, redirect client to a different replica
+      ~ client remembers the /timestamp OR log sequence number/ of the last read
+
+**** Consistent Prefix Reads
+     - client must see all writes in the same order they were executed
+***** Solution
+      ~ Make sure that writes that are casually related to each other are written to the same partition
+      > but in some applications that cannot be done effi‐ ciently. There are also algorithms that explicitly keep track of causal dependencies, a topic that we will return to in *“The “happens-before” relationship and concurrency” on page 186.*
+
+*** Solutions
+    ~ Transactions
+    > We will return to the topic of transactions in Chapters 7 and 9, and we will discuss some alternative mechanisms in Part III
+
+
+** References
+   - *chain replication*
+   -- [8] Robbert van Renesse and Fred B. Schneider: “Chain Replication for Supporting
+      High Throughput and Availability,” at 6th USENIX Symposium on Operating System
+      Design and Implementation (OSDI), December 2004.
+   -- [9] Jeff Terrace and Michael J. Freedman: “Object Storage on CRAQ: High-
+      Throughput Chain Replication for Read-Mostly Workloads,” at USENIX Annual
+      Technical Conference (ATC), June 2009.
+
+   - *chain replication in MS Azure*
+   -- [10] Brad Calder, Ju Wang, Aaron Ogus, et al.: “Windows Azure Storage: A Highly
+      Available Cloud Storage Service with Strong Consistency,” at 23rd ACM Symposium
+      on Operating Systems Principles (SOSP), October 2011.
+   -- [11] Andrew Wang: “Windows Azure Storage,” umbrant.com, February 4, 2016.

@@ -1,0 +1,20 @@
+- (x) {:fzf:}
+- (x) {:Outreachy:}
+- {:neovim:}
+- {:tmux:}
+- (◉) {:pattern-matching-utils:}
+- {:regexp:}
+- {:mio:}
+- {:websockets:}
+- {:nginx:}
+- {:GNU parallel:}
+- (x) {:figlet:}
+- {:remote access with ssh:}
+- {:heaptrack:}
+- {:using criterion for benchmarking in rust:}
+- {:how to correctly perform micro benchmarks:}
+- (x) {:The tsc register:}
+- {:A guide to rust modules:}
+- {:The cost of "Hello, world!" in every language:}
+- {:The PS1 variable:}
+- {:ANSI escape codes:}

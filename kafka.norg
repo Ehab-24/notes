@@ -1,0 +1,47 @@
+
+** Prerequesites
+   - Run zookeeper:
+   @code bash
+   bin/zookeeper-server-start.sh config/zookeeper.properties
+   @end
+   - Start the kafka server:
+   @code bash
+   bin/kafka-server-start.sh config/server.properties
+   @end
+   - Create a topic:
+   @code bash
+   bin/kafka-topics.sh --create --topic topic-name --bootstrap-server localhost:9092
+   @end
+
+
+** Producer and Consumer consoles
+   - To start a producer in the console
+
+** Files
+   - The following command runs the connector in standalone mode (separate single process). The connector reads data from the file and writes it to the topic `connect-test`.
+   - The first argument is the base config
+   - Second and third parameters specify which connectors to run
+   @code bash
+   bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties
+   @end
+
+   - You can also listen to the events sent to `connect-test` topic using the console consumer
+   @code bash
+   bin/kafka-console-consumer.sh --topic connect-test --from-beginning --bootstrap-server localhost:9092
+   @end
+
+
+** Topics
+   - Create a topic:
+   @code bash
+   bin/kafka-topics.sh --create --topic topic-name --bootstrap-server localhost:9092
+   @end
+   - List all available topics:
+   @code bash
+   bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+   @end
+   - Describe a topic:
+   @code bash
+   bin/kafka-topics.sh --describe --topic topic-name --bootstrap-server localhost:9092
+   @end
+

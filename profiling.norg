@@ -1,0 +1,14 @@
+* CPU
+  - hyperfine --- to measure the execution time of a program
+  -- better than *criterion* for rust programs?
+  - valgrind
+  -- kcachegrind --- to visualize the output of valgrind
+
+** References
+- [Profiling Rust Programs with valgrind, heaptrack, and hyperfine]{https://www.youtube.com/watch?v=X6Xz4CRd6kw}
+
+* Memory
+  - heaptrack
+
+** References
+- [Profiling Rust Programs with valgrind, heaptrack, and hyperfine]{https://www.youtube.com/watch?v=X6Xz4CRd6kw}

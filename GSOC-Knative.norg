@@ -1,0 +1,125 @@
+* (x) Potential Projects
+  ~ (_) Apache | TinyGL support for NuttX
+  -- {https://issues.apache.org/jira/browse/NUTTX-15}
+  -- {:Apache-NuttX-15:}
+  ~ (_) Apache | Add X11 graphic support on NuttX using NanoX
+  -- {https://issues.apache.org/jira/browse/NUTTX-16}
+  ~ (x) CNCF | Knative
+  - {https://knative.dev/}
+
+
+* (x) Selected Organization - CNCF
+  - [CNCF]{https://contribute.cncf.io/}
+  - [CNCF Projects List]{https://contribute.cncf.io/contributors/}
+
+
+* (x) Selected Project
+  - [Knative]{https://knative.dev/}
+
+
+* Knative
+
+  - [Eventing]{https://github.com/knative/eventing}
+
+** Resources
+   - [Concepts]{https://knative.dev/docs/concepts/}
+   - 󰜮 [Knative Beginner Tutorial]{https://www.youtube.com/watch?v=rZKaju9h7fQ}
+*** Tutorial
+    - [Knative Quickstart tutorial]{https://knative.dev/docs/getting-started/}
+    ---
+**** See also
+     - [YAML-based installation]{https://knative.dev/docs/install/yaml-install/}
+     - [Knative Operator Installation]{https://knative.dev/docs/install/operator/knative-with-operators/}
+
+     - [Shared drive]{https://drive.google.com/drive/folders/0AM-QGZJ-HUA8Uk9PVA}
+     - [Shared Google Calendar]{https://calendar.google.com/calendar/u/0/embed?src=knative.team_9q83bg07qs5b9rrslp5jor4l6s@group.calendar.google.com&pli=1}
+
+     - [Working Groups]{https://github.com/knative/community/blob/main/working-groups/WORKING-GROUPS.md}
+     - [Contributing]{https://knative.dev/docs/community/contributing/}
+     - [Code of conduct]{https://github.com/cncf/foundation/blob/main/code-of-conduct.md}
+
+     - [Knative - Serving]{https://github.com/knative/serving}
+     - [Community]{https://knative.dev/docs/community/}
+
+** NetworkPolicy support for Knative Serving
+   - [Github]{https://github.com/cncf/mentoring/blob/main/programs/summerofcode/2023.md#networkpolicy-support-for-knative-serving}
+
+** Potential Proposals for 2024
+   - [HTTP Source Proposal]{https://docs.google.com/document/d/1UGRf_jTQe1hNsIxudlNN_mvul76Nz7be0_41CEAJDEE/edit?resourcekey=0-x6-QtGcsKo4Uz9QFlrNDwQ#heading=h.n8a530nnrb}
+   -- */Relevant:/*
+   --- [Default Broker Class]{https://docs.google.com/document/d/1UGRf_jTQe1hNsIxudlNN_mvul76Nz7be0_41CEAJDEE/edit?resourcekey=0-x6-QtGcsKo4Uz9QFlrNDwQ#heading=h.n8a530nnrb}
+
+** Minikube
+   - To run minikube tunnel:
+   @code bash
+   minikube tunnel --profile knative
+   @end
+
+** Insights
+
+   - *Personally Identifiable Information:*
+   -- Personally Identifiable Information (PII) refers to any information that can be used to identify an individual. Example: Name, contact info, SSN, DOB, IP addr, biometrics, passport no., license no. etc
+
+   - *what is Control Plane?*
+   - *What is Data Plane?*
+   - *What are /Travis/ and /Jenkins/?*
+   - *What are /STL Components/?*
+   - *What is a registery in docker?*
+   -- A registry is a centralized service that stores Docker images. It acts as a repository for Docker images. Example: Docker hub.
+   - *Whats an OCI container image?*
+   -- *Open Container Initiative* is a standardized and open specification for container images provided by the Linux Foundation.
+   - *What are CRDs in k8s?*
+
+   - *What are the different networking layers in Knative? Namely: Ambassador, Contour, Gloo, Istio, Kong, Kourier.*
+   -- [Event Mesh]{https://knative.dev/docs/eventing/event-mesh/}
+
+   -- *Contour, Istio and Kourier are mentioned in the [Knative docs]{https://knative.dev/docs/install/yaml-install/serving/install-serving-with-yaml/#__tabbed_1_1}, take a look at them.*
+   - *What is CNAME?*
+   -- CNAME stands for Canonical Name, and it is a type of DNS (Domain Name System) record used to specify that one domain name is an alias for another domain
+   -- Allows you to map one domain (or subdomain) to another domain.
+   - *What is sslip.io?*
+   - *What is a DNS suffix?*
+
+*** CloudEvents {https://github.com/cloudevents/spec}
+    - CloudEvents is a specification for describing event data in a common way.
+
+*** Telepresence {https://www.telepresence.io/docs/latest/quick-start/}
+    - Telepresence is an open source tool that enables you to set up remote development environments for Kubernetes where you can still use all of your favorite local tools like IDEs, debuggers, and profilers.
+
+*** Istio Github {https://github.com/istio/istio}
+    - Istio is an open-source service mesh that provides a way to connect, manage, and secure microservices in a containerized application.
+    - A service mesh is a dedicated infrastructure layer for facilitating service-to-service communications between services or microservices using a proxy.
+    -- [What is a service mesh]{https://www.tibco.com/sites/tibco/files/media_entity/2021-05/service-mesh-diagram.svg}
+
+** Installation
+   - Follow the guide at: {https://knative.dev/docs/getting-started/quickstart-install/}
+   -- quickstart tutorial provides a simplified, local Knative installation by using the Knative `quickstart` plugin.
+
+** Functions
+   - Follow the guide at: {https://knative.dev/docs/getting-started/about-knative-functions/}
+   - To run a function:
+   @code bash
+   kn func run --registry=hub.docker.com/u/ehab24 [--container=false]
+   @end
+   > *Note:* Use `--container=false` to prevent rebuild of the image
+   - Make changes to handle.go and rerun the above command, no need to rebuild the image (I guess the code files are simply copy pasted)
+   - To deploy the function to your registry, run:
+   @code bash
+
+   @end
+
+** Serving
+   - [Install Knative Serving with YAML File]{https://knative.dev/docs/install/yaml-install/serving/install-serving-with-yaml/#install-a-networking-layer}
+
+** Eventing
+   - [Install Knative Eventing with YAML File]{https://knative.dev/docs/install/yaml-install/eventing/install-eventing-with-yaml/}
+   - [Documentation]{https://knative.dev/docs/eventing/}
+
+
+* Resources
+  - [GSOC 2024 Timeline]{https://developers.google.com/open-source/gsoc/timeline}
+  - [What is Knative?]{https://www.youtube.com/watch?v=69OfdJ5BIzs}
+
+  - [Opportunities in GSOC 2024 | Github]{https://github.com/cncf/mentoring/discussions/1093}
+  - [Ideas list]{https://github.com/cncf/mentoring/blob/main/programs/summerofcode/2024.md#ideas}
+  - 󰓎 [CNCF GSOC Admin Tasks]{https://github.com/cncf/mentoring/issues/1119} 

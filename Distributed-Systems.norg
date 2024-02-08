@@ -1,0 +1,205 @@
+
+* Course
+
+** Lecture 1 - The motivation behind log-structured filesystems
+   *Q1. RAM or volatile memory is getting larger because it is getting cheaper. Can you think how it would affect the volumes of i) reads and ii) writes?*
+   Disk reads will descrease because more data can be cached during look-ahead reading.
+   Disk writes will descrease because more data can be cached in page cache, and written to disk in larger chunks.
+
+   *Q2. "There is a large gap between random I/O performance and sequential I/O performance". Briefly explain this claim with reasons.  *
+   Random IO is slower because blocks are stored at random locations on disk, and the disk head has to move to the correct location before reading the block.
+   Sequential IO is faster because the disk head does not have to move between blocks.
+
+   *Q3."Existing file systems perform poorly on many common workloads for example when creating a file". Can you explain the claim above with reasons.*
+   Becasue they need to update file metadata (inode). This requires a disk write, which is slow.
+
+
+   *Q4 In light of all trends you have defended in the questions above, what should be the characteristics or focused goals of a very efficient file system? Write in numbered points.*
+   Store inode and file actual contents close together on disk.
+   This is the motivation of log-structured file systems.
+
+   *Q5. i) How can reads on a disk be made sequential by a file system? ii) How can writes be made sequential by a file system?*
+
+** Lecture 2 (Absent)
+
+** Lecture 3
+*** Class Assigment (Assignment 3)
+    *a) Name two data systems designed and used by any of the two companies mentioned above. You may use Google for this.*
+    1. Large scale usually use a distributed file system for large data storage such as Hadoop Distributed File System (HDFS) or Google File System (GFS)
+    2. Large scale also use distributed databases for large data storage such as HBase or Cassandra which implement algorithms like RAFT or zookeeper behind the scene to ensure data consistency in a distributed environment
+
+    *b) What does agile mean? What is meant by "keeping development cycles short"?*
+    Agile is a software development methodology that focuses on iterative development, where requirements and solutions evolve through collaboration between self-organizing cross-functional teams. Agile promotes adaptive planning, evolutionary development and delivery, a time-boxed iterative approach, and encourages rapid and flexible response to change. It is a conceptual framework that promotes foreseen interactions throughout the development cycle. The Agile Manifesto introduced the term in 2001.
+    "Keeping the development cycles short" means that the development cycles should be short. The development cycles are the time between the start of the development and the end of the development. The development cycles should be short because it is easier to make changes to the software when the development cycles are short. If the development cycles are long, it is harder to make changes to the software because the software is more complex.
+
+    *c) What does bespoke mean? What is the difference between in-house and commercial software?*
+    Bespoke means custom; bespoke software is software that is written for a specific customer. In-house software is software that is written by the company that uses it. Commercial software is software that is written by a company that sells it to many customers.
+
+    *d) What kind of parallelism is meant here? What are the limitations to exploit parallelism?*
+    - (_) Instruction level parallelism (ILP) is the parallelism meant here. The limitations are that the compiler has to be able to find the parallelism, and the hardware has to be able to execute it.
+    - (x) Multithreading and Multiprocessing is the parallelism meant here. The limitations are that the compiler has to be able to find the parallelism, and the hardware has to be able to execute it.
+
+    *e) What is IaaS? What does it offer? How does Amazon Web Services fit in as an example here?*
+    Infrastructure as a Service (IaaS) is a cloud computing service model that provides virtualized computing resources over the internet. IaaS is one of the three main categories of cloud computing services, alongside software as a service (SaaS) and platform as a service (PaaS). 
+
+    *f) Can you think of an online commercial website where these standards would be important? briefly explain why these standards would be important for this website?*
+    An example of an online commercial website where high availability standards are crucial would be an e-commerce platform, such as Amazon or eBay.
+    Importance of High Availability for an E-commerce Website:
+    Continuous Sales and Revenue: Extended downtime could result in lost sales opportunities, customer frustration, and potential revenue loss.
+    Customer Experience: If a customer visits an e-commerce site and encounters downtime or slow performance, it can lead to a negative perception of the brand.
+    Global Reach: it's essential for the website to be available 24/7 to accommodate users at any time.
+    Brand Reputation: Frequent outages or maintenance-related downtime can harm the brand's reputation, eroding trust among customers.
+
+    *Q2. For reliable software expectations include:*
+    *a) The application performs the function that the user expected. We have referred to this many times in class, what term do we use?*
+    We use the term correctness.
+
+    *b) It can tolerate the user making mistakes or using the software in unexpected ways. As a programmer how can you ensure this?*
+    To ensure that software can tolerate user mistakes or unexpected usage, programmers can implement the following strategies:
+    Input Validation:
+    Implement checks for data types, ranges, and formats to ensure inputs conform to expected criteria.
+    Error Handling:
+    Implement robust error-handling mechanisms to gracefully handle unexpected situations. Use try-catch blocks, errors as values, or equivalent constructs to capture and manage exceptions.
+    Graceful Degradation:
+    Design the software to gracefully degrade in performance or functionality when faced with unexpected inputs or situations.
+
+    *c) Its performance is good enough for the required use case, under the expected load and data volume. What do you think would be the metrics of performance measurement?*
+    Response Time (Metric: milliseconds/seconds): The time it takes for the system to respond to a user's request.
+    Throughput (Metric: transactions/requests per second): The number of transactions or requests processed by the system per unit of time.
+    Concurrency (Metric: concurrent users/transactions): The ability of the system to handle multiple simultaneous users or transactions.
+    Resource Utilization (Metric: percentage of total resources): The amount of system resources (CPU, memory, disk I/O) consumed during operation.
+
+    *d) The system prevents any unauthorized access and abuse. As a programmer how can you ensure this?*
+    Secure Authentication:
+    Implement robust user authentication with multi-factor options.
+    Authorization Controls:
+    Enforce proper access controls based on roles and permissions.
+    Data Encryption:
+    Encrypt sensitive data in transit and at rest.
+
+    *Q3. Even if a system is working reliably today, that doesn’t mean it will necessarily work reliably in the future. One common reason for degradation is increased load: perhaps the system has grown from 10,000 concurrent users to 100,000 concurrent users, or from 1 million to 10 million. Perhaps it is processing much larger volumes of data than it did before. This called a scalability issue. Can you identify some scalability issues at your university, explain in points?*
+    The attendance portal at our university does not scale very well. It does not response to the client website if there are a lot of students accessing the server at a time.
+
+
+
+** Lecture 4
+   *Q1: You can look at system performance in two ways:*
+   - When you increase a load parameter and keep the system resources (CPU, memory, network bandwidth, etc.) unchanged, how is the performance of your system affected?
+   - When you increase a load parameter, how much do you need to increase the resources if you want to keep performance unchanged?
+
+   ~ *Both questions require performance numbers, for example memory size can be used to describing the performance of a system. What trend would we be looking for as regards memory?*
+   ~ *As far as the CPU is concerned we could be looking at the throughput. What is throughput? Give a real application use case and define throughput of that use case?*
+
+   ~ For memory, the trend you would be looking for is a positive correlation between increased load and increased memory usage. Following are the side-effects:
+   ~~ Increased miss rate
+   ~~ Thrashing (frequent swapping)
+   ~ Throughput, in the context of the CPU, refers to the amount of work the CPU can perform within a given time period. It is often measured in terms of tasks or instructions executed per unit of time (e.g., instructions per second).
+
+   *Q2: Latency and response time are often used synonymously, but they are not the same. The response time is what the client sees: besides the actual time to process the request (the service time), it includes network delays and queueing delays. Latency is the duration that a request is waiting to be handled—during which it is latent, await‐ ing service. Define latency and response time in terms of a visit to a restaurant.*
+   Lets say a customer makes an order, the total time duration until he is served is the response time.
+   The waiter takes his order and places it in a queue, from where it is received by the chef at a let time. The time duration between waiter placing order to the queue and the chef taking the order is latency.
+
+   *Q3: Give two different use cases (computer applications) where in one throughput is important as a measure of performance and in the other response time is the better measure.*
+   ~ In a High-Performance Computing (HPC) cluster, where scientific simulations or data-intensive computations are performed, throughput is a crucial measure of performance. In this scenario, the primary goal is to maximize the overall amount of computation or data processing within a given time frame. Example; i) batch jobs ii) The Human Genome Project.
+   ~ In the context of web applications, response time becomes a critical measure of performance. Users expect quick and responsive interactions when accessing web services. Example; Amazon's E-commerce store
+
+   *Q4: i) How do you calculate the mean or average of a collection of values? ii) How do you calculate the median of a collection of values?*
+   ~ Mean:
+     Sum all values and divide by total number of values in the collection
+   ~ Median:
+     Sort all values and take middle one. If the number of values is even, take mean of the two center values. 
+
+   *Q5: Coping with Load: How do we maintain good performance even when our load parameters increase by some amount? This is the real question that comes up when thinking of Scalability. The two options to deal with scalability are scaling up (vertical scaling, moving to a more powerful machine) and scaling out (horizontal scaling, distributing the load across multiple smaller machines). Distributing load across multiple machines is also known as a shared-nothing architecture. ~ Which do you think seems like the better option, explain your choice by comparison. ~ Explain shared-nothing by comparing it to a sharing architecture (give an example).*
+
+   ~ The choice between vertical and horizontal scaling depends on the specific requirements and constraints of the system. Generally, horizontal scaling is favored for its better scalability, cost-effectiveness, and fault tolerance.
+   ~ Shared vs Shared-Nothing Architecture:
+   ~~ Shared-Nothing Architecture:
+      In a shared-nothing architecture, each node (machine) in the system operates independently and does not share its state or memory with other nodes. Data is partitioned across nodes, and each node is responsible for a subset of the overall workload.
+      Example: Distributed databases like Cassandra where each shard is handled independently by different servers.
+   ~~ In a shared architecture, multiple nodes share a common resource or state. Changes or updates on one node are immediately visible to other nodes, and there is a level of interdependence.
+      Example: Traditional relational databases where multiple servers might share access to the same database.
+
+   *Q6: "For example, a system that is designed to handle 100,000 requests per second, each 1 kB in size, looks very different from a system that is designed for 3 requests per minute, each 2 GB in size—even though the two systems have the same data throughput." i) Compare the throughput for both of these systems? ii) Explain why the design for both will be very different as said in the excerpt above.*
+
+   ~ Throughput Comparison:
+     Throughput is the measure of how much work a system can handle within a specific time frame. In the given example:
+     System A: Designed to handle 100,000 requests per second, each 1 kB in size.
+     System B: Designed for 3 requests per minute, each 2 GB in size.
+     Both systems have the same data throughput, but the rate at which they process and manage this data is vastly different.
+   ~ The design differences between the two systems stem from their distinct workload characteristics. System A, aimed at high throughput with 100,000 requests per second of small 1 kB data, prioritizes concurrency, low latency, and scalability. This leads to a distributed architecture, efficient networking, and emphasis on caching and indexing.
+     In contrast, System B, designed for low throughput with 3 requests per minute of large 2 GB data, focuses on handling data intensity, storage capacity, and batch processing.
+
+   *Q7: Most requests to a system are reasonably fast, but there are occasional outliers that take much longer. Perhaps the slow requests are intrinsically more expensive, e.g., because they process more data. But even in a scenario where you’d think all requests should take the same time, you get variation: random additional latency could be introduced  the loss of a network packet and TCP retransmission or a garbage collection or mechanical vibrations in the server rack [18], or many other causes. i) What are outliers? ii) Put your Operating Systems hat on, can you list a couple of reasons for outliers.*
+   ~ Outliers:
+     Outliers are requests that experience unusually long response times compared to the majority of requests, indicating a deviation from the expected or average behavior.
+   ~ Reasons:
+   - Network packet loss and retransmission
+   - Garbage collection: Garbage collection may lead to unpredictable memory usage patterns, where outliers become frequent.
+   -- causes thrashing and high miss rates
+   - An interrupt or page fault during a request
+   - CPU scheduling variability: processes that have high priority from the client's prespective may be given less priority by the OS.
+   - Resource Contention
+
+   *Q8: When you talk about maintainability of a large system with many components, name the design principles you would engage from OOP that would help to keep the system easily extendable and easy to maintain?*
+   Encapsulation. Encapsulation would help us write each component of the system as a separate module. These modules are independent of one another, individually extendable, and hide their inner complexity from client components.i
+
+
+   ---
+  ---
+---
+
+___
+
+
+* Raft
+  {:Raft:}
+
+
+* Zookeeper
+  - {:Zookeeper:}
+
+
+* CRAQ
+  - [MIT 6.824: Lecture 9 - CRAQ]{https://timilearning.com/posts/mit-6.824/lecture-9-craq/}
+
+
+* Book
+
+** REST and RPC
+
+*** RPC
+    Page 136:
+    >  It is reasonable to assume that all servers will be updated first and all clients second. Thus, you only need backward compatibility on requests and forward compatibility on responses.
+
+** Message Brokers - page 137 & 441
+*** Advantages - page 137
+    • It can act as a buffer if the recipient is unavailable or overloaded, and thus improve system reliability.
+    • It can automatically redeliver messages to a process that has crashed, and thus prevent messages from being lost.
+    • It avoids the sender needing to know the IP address and port number of the recipient (which is particularly useful in a cloud deployment where virtual machines often come and go).
+    • It allows one message to be sent to several recipients.
+    • It logically decouples the sender from the recipient (the sender just publishes messages and doesn’t care who consumes them).
+
+** Actor Model - pgae 138
+
+*** Popular frameworks
+    - Akka - Scala & Java | Distributed
+    -- uses java's built-in serialization by default, which does not support rolling updates. Use proto buffers for rolling updates.
+    - Orleans - Distributed
+    -- uses custom encoding format
+    -- does not support rolling updates
+    -- to update your application:
+    ~~~ setup a new cluster
+    ~~~ move traffic from old cluster to new cluster
+    ~~~ shut down old cluster
+    -- you can use custom serialization plug-ins
+    - OTP - Erlang Distributed
+    -- rolling updates are possible with careful design
+    - /*(Extra)*/ Actix - rust
+
+    - [How the actor model works by example]{https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/How-the-Actor-Model-works-by-example}
+
+** Replication - page 151
+   {:Replication:}
+
+** References
+   - [Designing Data Intensive Applications]{/ /home/ehab/Documents/distributed_systems/designing-data-intensive-applications.pdf} 

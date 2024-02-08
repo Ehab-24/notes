@@ -1,0 +1,14 @@
+
+** Lecture 2
+   - We have 2 steps:
+   ~~ Identufy the quantities: {*** Control variables} and {*** State variables}
+   ~~ Identify the model: mathematical equationsthat define the {*** Dynamics} of the system
+
+*** Control variables
+    - *Definition:* Directly controlled by us
+
+*** State variables
+    - *Definition:* Derived from control variables
+
+*** Dynamics
+    - *Definition:* how state changes over time

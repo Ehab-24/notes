@@ -1,0 +1,28 @@
+** TODO
+   - (x) Install kotlin dependencies
+   - (✔) build source code
+
+** DNS
+   DDI is the combination of DNS, DHCP and IPAM which is used to manage IP resources in networking. DDI automation is vital for multi-cloud deployments.
+
+** DHCP
+
+** IPAM
+
+** DDI Api
+   - [further reading]{https://eclipse.dev/hawkbit/apis/ddi_api/}
+
+** Learnings
+
+*** ( ) DDI Consumer
+**** ( ) Readings ~ src/main/**/*.kt
+     ~ (-) ddi-consumer/src/main/kotlin/org/eclipse/hara/ddi/api/**/*.kt
+**** ( ) Insights
+
+*** ( ) Hara DDI Client
+**** ( ) Readings
+**** ( ) Insights
+
+*** Virtual Device
+**** ( ) Readings
+**** ( ) Insights

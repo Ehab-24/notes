@@ -1,0 +1,33 @@
+* Self learning
+  - ( ) Eclipse foundation open source projects
+  - ( ) Actor model
+  - ( ) chat application in rust
+  - ( ) kv-database in rust
+  - ( ) DNS server in rust
+  - ( ) Advent of code in rust
+  - ( ) The 1 Billion Row Challenge in rust [1 BRC Github]{https://github.com/gunnarmorling/1brc}
+  - ( ) NFT marketplace
+  - (?) video streaming in rust or go
+  - (!) Servers (NGINX, Apache...)
+  - ( ) Kubernetes
+  - ( ) Docker
+  - ( ) Message queues
+  -- ( ) Kafka
+  -- ( ) RabbitMQ
+  -- ( ) Redis
+  - ( ) WebRTC
+  - ( ) WebTransport
+  - ( ) Webhooks
+  - ( ) SSH
+  - ( ) WebSockets
+  -- ( ) {:mio_websocket:}
+  - ( ) {:Database:}
+  - GNU parallel
+  - Implement API rate limiting
+  - How to prevent DoS?
+  - How to prevent DDoS?
+  - {:SIMD:}
+  - {:HTTP:}
+  - {:map reduce:}
+  - {:Raft:}
+  - {:Zookeeper:}

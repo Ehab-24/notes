@@ -1,0 +1,11 @@
+
+- Built-in benchmarking library:
+-- available under `std::test::Bencher`
+-- `cargo bench` to run all benchmarks
+> *Note:* The #[bench] attribute is currently unstable and only available on the nightly channel. There are some packages available on crates.io that may help with running benchmarks on the stable channel, such as Criterion. [3]
+
+** References
+   - [1] [Benchmark testing your Rust code]{https://www.youtube.com/watch?v=eIB3Pd5LBkc}
+   - [2] [Benchmarking and Profiling Rust Applications for Optimal Performance]{https://codedamn.com/news/rust/benchmarking-profiling-rust-applications-optimal-performance}
+   - [3] [cargo-bench(1)]{https://doc.rust-lang.org/cargo/commands/cargo-bench.html}
+   - [4] [criterion]{https://crates.io/crates/criterion}

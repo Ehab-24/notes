@@ -1,0 +1,18 @@
+You need to follow these to connect to a remote server:
+
+1. Remote server
+- Make sure openssh-server is installed.
+- Make sure ssh service is running.
+> sudo systemctl status ssh
+  run `sudo systemctl start ssh` if it is not running.
+- Make sure port 22 is open.
+> sudo ufw allow 22
+  run `sudo ufw enable` if ufw is not enabled.
+You might need to install ufw first.
+- Make sure the server is connected to the internet.
+
+2. Local machine
+- Make sure openssh-client is installed.
+- (?) Make sure ssh service is running.
+- Make sure port 22 is open.
+

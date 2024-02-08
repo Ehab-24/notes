@@ -1,0 +1,12 @@
+
+** Add a user to dodocker group
+   @code bash
+   sudo usermod -aG docker $USER
+   @end
+
+** Push a docker image to docker hub
+   @code bash
+   docker login
+   docker tag [<image_id>|<image_name>:<tag>] <docker_hub_username>/<repository_name>:<tag>
+   docker push <docker_hub_username>/<repository_name>:<tag>
+   @end

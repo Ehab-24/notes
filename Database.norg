@@ -1,0 +1,136 @@
+** Exposure
+   Try all the different databases out there.
+
+** Simple KV store
+   Build your own kv database.
+
+** Cassandra
+*** Installation
+**** Arch (Bug, Not fixed)
+***** Prerequisites
+      - Java 8
+      - Python 2.7
+      @code bash
+      yay -S cassandra
+      @end
+      - running `sudo systemctl start cassandra` gives the following error:
+      @code
+      Job for cassandra.service failed because the control process exited with error code.
+      See "systemctl status cassandra.service" and "journalctl -xeu cassandra.service" for details.
+      @end
+
+**** Docker
+     - pull the image:
+     @code bash
+     sudo docker pull cassandra
+     @end
+     - start cassandra:
+     @code bash
+     sudo dokcer run --name cluster_name cassandra
+     @end
+     - start `cqlsh` in a new terminal:
+     @code bash
+     sudo docker exec -it cluster_name cqlsh
+     @end
+
+     > *Note:* starting cqlsh might fail in the first try, see: [cassandra.service fail to start{https://bbs.archlinux.org/viewtopic.php?id=225384}
+
+*** Cheatsheet
+    - To list all tables in a keyspace:
+      `SELECT table_name FROM system_schema.tables WHERE keyspace_name = 'keyspace_name';`
+    - To create a table:
+      `CREATE TABLE IF NOT EXISTS customer ( customer_id UUID PRIMARY KEY );`
+    - To create an index:
+      `CREATE INDEX IF NOT EXISTS idx_name ON keyspace_name.table_name (column_name);`
+    - To query a column other than the PRIMARY KEY, you either:
+    -- need an index on that column
+    -- need to specify `ALLOW FILTERING`:
+    @code javascript
+    SELECT * FROM customer WHERE last_name = 'Doe' ALLOW FILTERING;
+    @end
+
+*** References
+    - [Data Types]{https://cassandra.apache.org/doc/stable/cassandra/cql/types.html}
+
+
+** PostgreSQL
+*** Architecture
+    - Uses process instead of threads.
+    - Everything is an append only log. [Postgres WAL files and Sequence numbers]{https://www.crunchydata.com/blog/postgres-wal-files-and-sequuence-numbers}
+    - Uses Tuples (rows) for MVCC
+
+**** Post Master
+     - Starts all the other processes:
+     -- Startup.
+     -- Logger
+     -- Checkpointer.
+     -- Background Writer.
+     -- Autovacuum Launcher.
+     -- Stats Collector.
+     -- WAL writer.
+     -- WAL Receiver.
+     -- WAL Sender.
+     -- WAL Archiver.
+     -- WAL Writer.
+     -- Background Writer.
+
+**** Backend Process
+     - Handles a client connection.
+     - Limit: max_connections (100)
+
+**** Shared Memory
+     - Shared between all processes.
+     - Holds WAL records and pages in memory.
+
+**** Auxiliary Processes
+
+***** Checkpointer
+      - Writes dirty pages and WAL records to disk using the O_DIRECT flag.
+      - references:
+      -- [O_SYNC vs O_DIRECT]{https://stackoverflow.com/questions/5055859/how-are-the-o-sync-and-o-direct-flags-in-open2-different-alike}
+      -- [FreeBSD open man page]{https://man.freebsd.org/cgi/man.cgi?query=open&apropos=0&sektion=0&manpath=FreeBSD%208.2-RELEASE&format=html}
+
+***** Background Writer
+      - Wakes up periodically to write dirty pages from shared memory to disk.
+
+***** Background Workers
+      - Can behave as a client-connected server process {**** Backend Process} or a regular client application.
+      - Advantage: predictable resource usage.
+      - Limit: max_worker_processes
+      - references:
+      -- [Chapter 48. Background Worker Processes]{https://www.postgresql.org/docs/current/bgworker.html}
+
+***** Logger
+      - Writes log messages to disk.
+
+***** Autovacuum Launcher
+      - Launches autovacuum worker processes.
+
+***** Autovacuum Worker
+      - cleans up unneeded tuples.
+      - Limit: autovacuum_max_workers
+
+***** WAL Writer
+      - Wakes up and flushes WAL records from shared memory to disk when user makes a commit.
+
+***** WAL Receiver
+      - Receives WAL records from WAL Sender.
+      - Its a process on the replica.
+
+***** WAL Sender
+      - Sends WAL records to WAL Receiver in replicas.
+      - Limit: max_wal_senders
+
+***** WAL Archiver
+      - Backs up WAL entries.
+      -- WAL entries are a compressed version of user made changes.
+
+***** Stats Collector
+      - Collects statistics and metric about the database.
+
+***** Starter Process
+      - runs first before {*** Post Master} starts listening.
+      - Applies WAL changes to {**** Shared Memory}.
+      -- Known as *redo*.
+      -- Brings memory pages to same state as before the crash.
+

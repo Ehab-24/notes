@@ -1,0 +1,34 @@
+** Todo:
+   - finalize written stuff for products/*
+   - check & use orders/*
+
+*** Written stuff
+    - (x) purchase_orders/ + transfers/: products datatable
+    - (x) AddProductsDatatable: styling
+    - ( ) purchase_orders/id: add browse dialog
+    - (x) var/:var/: inventory datatable
+    - (x) fix purchase_orders api
+    -- (x) GET purchase_orders
+    -- (x) GET purchase_orders/id
+    - (x) fix transfers
+    -- (x) Transfer type
+    -- (x) GET transfers
+    -- (x) GET transfers/id
+
+    - (x) inventory/Datatable:
+    -- (x) invisible icons unless hovered
+    -- (x) smaller *available* and *on hand* input fields
+
+    - (x) Datatable: Header >> font normal
+    - (!) api/*/invLvls: lookup locations in
+    - (!) api/*/invLvls: unavailable, committed, onHand in
+    - ( ) purchase_orders/ + transfers/ + gift_cards/: Action Card: buttons + dialogs
+    - (x) EditSupplierDialog: fix height
+    - (x) products/dialogs/*: fix height
+
+    - (x) products/new:
+    -- (x) remove *status* select's label
+    -- (x) publishing: Sales channel & Markets >> font thin
+
+    - ( ) check responsiveness (all pages)
+    - (x) fix products/id: xl: responsiveness

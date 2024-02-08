@@ -1,0 +1,109 @@
+* Coderush24
+
+** CoderushGDSC ITU Website
+   - (x) Github style theme 
+
+*** (-) Todos
+    - (_) CodeRush24 banner (a tag) on GDSC title
+    - (x) fix Level3 input icons
+    - (x) Initial pop-up for registration
+    -- (x) delay 300 ms
+    - (x) Apply now -> Register now
+    - (x) Change CTA on home/Hero
+    - (_) Code Block Type Writter
+    - (x) Footer
+    -- (x) Be our sponser
+    -- (x) Contact Info
+    -- (x) Social links
+    - (x) Connect database
+    - (x) POST /coderush/registration
+    - (_) Clear form after submission
+    - (x) redirect on successfull registration
+    - (x) more content on homepage
+    -- (x) event timeline
+    -- (_) ...
+    - (-) registration email
+    -- (x) when a team pays the registration fee (manual)
+    - (x) registration form
+    -- (x) level 4
+    --- (x) create image uploader component (drag n drop)
+    --- (_) connect google drive to image uploader
+    --- (x) details of payment
+    - (-) Web hackathon man page
+    -- (_) Zain?
+    -- ( )   
+    - ( ) Competitive programming man page
+    -- (?) Saad?
+
+** Admin Dashboard (Website)
+
+** Meeting
+*** 2024-01-16
+    - ( ) send emails after registration and payment (manually?)
+    - ( ) how to verify team payment from easypaisa
+    - (_) what else to add to homepage?
+    - ( ) need someone to take care of website's dummy content
+**** Findings
+     - 
+     
+
+** Management
+   - send confirmation emails on successful registration
+   - only team leads will register their teams
+
+*** Whatsapp Group
+    - share all updates
+    - only include team leads
+
+** Submissions
+*** GDSC-ITU@github
+    - Change organization description
+    - add Saad Ahmad, Sumair
+    - add social links
+
+*** Setup github classroom
+    ~ Sign into github classroom [Github Classroom - Coderush24 web]{https://classroom.github.com/classrooms/156463098-gdsc-itu-classroom-coderush}
+    ~ Create a new roster and add all participants (Team names)
+    ~ Send invite link to participants
+    - (?) Production test
+
+*** Students
+    ~ Open the shared link
+    ~ Authorize github classroom
+    ~ (?) Select your team
+    ~ (?) Create a new team
+    ~ Accept assignment
+    ~ Github starts setting up the repository --- refresh webpage to see updates
+    ~ Go to the repository link and add your team members
+    ~ Happy coding!
+
+** (-) Refreshments
+
+
+
+** Prerequesites
+   - Participants should be fimiliar with git and github as all submissions will be made on github classroom
+   - All participants must bring their own laptops
+   - Participants are encouraged to bring their own internet devices as the venue might not have a stable internet connection
+
+** Rules
+   - Shared right before the event starts
+   - Also printed on the manual
+   - Participants will be given admin access to their repositories
+   - All repositories will be locked at the end of the event
+   - Teams will be evaluated on the last commit to their remote repository
+
+*** General
+    - Time limit: 8 hrs
+    - Team size: 2 or 3 members
+    - use any language, framwork or library
+    - no restrictions on libraries
+    - (?) plagiarism is allowed
+    - (?) use any AI assistant like ChatGPT or Github Copilot
+
+*** Penalties
+    - 10 points for inter team communication/collaboration
+
+*** (-) Grading criteria
+
+

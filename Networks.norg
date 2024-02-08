@@ -1,0 +1,42 @@
+
+** Lecture 1
+*** Cimmunication Protocols
+    - handle {**** Multiplexing}, compressions, reliability.
+
+**** Multiplexing
+***** Circuit switching
+      - legacy technique
+      - used in tele-networks
+      - less efficient
+      - destination address is managed by operator, unknown to user
+      - but quality of communication is high, because a dedicated channel is given for each communication
+      - as the number of concurrent users increases, quality descreases
+      -- you have to reduce the timef frame, increase frequency (which results in higher throughput required) etc
+      - channel can be medium, time, frequency, space
+      -- *medium:* an operator (person) patches wires using jumpers to clip the caller or connect him to the designted target
+      --- Example; telephone line from Lahore to Islamabad
+      -- *time:* alot time frames to users, send that user's data in that time frame, because the throughtput of (physical) cable is a lot more than a signle user will need
+      --- Example; for voice signals, we only need 64 bits/sec of transmission throughput
+      -- *frequency:* assing a unique radio frequency to each client
+***** Packet switching
+      - break down messages into smaller packets
+      - assign destination address to each packet
+      - channel is shared by all (no dedicated channels)
+      - packets may be delayed (when traffic is high) -> not predictable
+
+*** Internet
+**** LAN
+**** WAN
+**** (?) WLAN
+
+*** Architecture
+**** Internet Service Provider (ISP)
+     - organize that provides WAN service (e.g; ptcl)
+     - connects devices of low-tier providers together
+     -- a device of each low-tier provider must be present at the same location
+
+*** Layers
+    - See *OSI layers models* slide
+
+*** Holes
+    - (?) what is low-pass filtering

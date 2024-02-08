@@ -1,0 +1,47 @@
+SIMD stands for Single Instruction Multiple Data. SIMD types are used to represent multiple values at once. SIMD types are useful when you want to perform the same operation on multiple values at once. SIMD types are not yet supported by all browsers, so you may need to use a polyfill to use them.
+
+** Todo
+   @code rust
+   fn add_u32x4(x: [u32; 4], y: [u32; 4]) -> [u32; 4] {
+      unsafe {
+         let xx: i32x4 = transmute([1, 2, 3, 4]);
+         let yy: i32x4 = transmute([5, 6, 7, 8]);
+         asm!(
+         "paddd {x} {y}",
+         x = inout(xmm_reg) xx,
+         y = in(xmm_reg) yy,
+      );
+         transmute(xx)
+      }
+   }
+   @end
+   - what is transmute?
+
+
+** Benchmarking
+   - compare the following code (and its 64, 256 versions) with a simple for loop:
+   @code c
+   void simd_addition(int *a, int *b, int *result, int size) {
+      int simd_size = size - (size % 4);
+
+      for (int i = 0; i < simd_size; i += 4) {
+         __m128i va = _mm_loadu_si128((__m128i*)&a[i]);
+         __m128i vb = _mm_loadu_si128((__m128i*)&b[i]);
+         __m128i vresult = _mm_add_epi32(va, vb);
+         _mm_storeu_si128((__m128i*)&result[i], vresult);
+      }
+
+      for (int i = simd_size; i < size; ++i) {
+         result[i] = a[i] + b[i];
+      }
+   }
+   @end
+
+*** Metric
+    - time
+    - memory utilization
+    - cpu utilization
+    - number of instructions
+
+** References
+   - [Single Instruction Multiple Data - an overview]{https://www.sciencedirect.com/topics/computer-science/single-instruction-multiple-data}

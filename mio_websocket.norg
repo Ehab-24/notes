@@ -1,0 +1,3 @@
+Built on top of `mio`, short for *Metal I/O*, a library for polling the OS for events.
+
+Create a single threded event loop that polls the OS for events.

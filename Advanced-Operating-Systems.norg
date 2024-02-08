@@ -1,0 +1,206 @@
+
+* Lectures
+
+** Lecture 1 (Absent)
+   - Sir gave basic idea of a lot of stuff
+
+** Lecture 2
+*** Life-cycle of an Interrupt Event
+    ~ Hardware device writes its /id/ to data bus
+    ~ Signals *1* on the special line (goes directly to cpu) 
+    ~ cpu reads hardware /id/ and starts executing the corresponding interrupt service routine
+    ~ OS uses its special data-structures to identify which process was indirectly responsible for the interrupt, and moves it from waiting list to ready queue
+
+*** Program Instructions
+    - instructions may be dynamic in size (e,g; 1,2,3,.. bytes)
+    - first few buts (5 I think) are reserved for /opcode/
+    - only the address of the first byte of an instruction is used to fetch it from memory
+    - special digital circuits (hardware) determines the length of instruction based on the /opcode/
+
+*** Registers
+    - the length of the instruction read is automatically added to the /PC/ register
+    - in a single /JUMP/ instruction, /PC/ is updated twice
+    ~~ automatic PC increment as explained above
+    ~~ with the value in /JUMP/
+
+*** Insights
+    - the interrupt service routine addresses corresponding to a hardware device /id/ are stored in a table in memory
+    - this table is loaded by OS on boot
+    - interrupt service routines live in kernel space
+    - *How can OS take cpu from a running process?*
+    ~ using syscalls that do I/O
+    ~ interrupts by the (hardware) clock
+
+
+** Lecture 3
+   - I/O bursts
+   - cpu bursts
+   - Base register = CS (code segment) register
+   - PC (program counter) = IP (instruction pointer)
+   - PC and CS are added together automatically (DLD n that) every time an instruction needs to be fetched
+   -- result of this calculation is called *Physical address*
+   -- value inside IP register is the *logical address*
+   -- this process is known as *Address translation*
+   - to change IP and CS atomically, we have special cpu instructions
+   -- one of them is /cli/ (clear interrupts)
+   --- sets the value inside interrupts register to 0
+   - OS has special data-structures that store values of all cpu registers on a context switch
+   -- one such data-structures is needed for each process
+   -- all of the data-structures are stored as an array
+   -- this data-structure also stores some extra info like current state of the process 
+   -- OS loads this context when cpu is given to a ready process
+   -- ton boot, he first context is read from a fixed location everytime
+
+** Lecture 4
+   @code c
+   struct PCB {
+       int pid;
+       int state;
+       unsigned int _eax;
+       //...other cpu registers
+       int next;    // points to the next process in `pcb` list
+   };
+   struct PCB pcb[1024];    // static array to store context of running processes
+   @end
+
+
+   - To save the register values, use the `asm` macro
+   - On a function call for interrupt or syscall, /CS/ and /IP/ (while vector) is used as return address
+   - On interrupt/syscall, $CS + IP$ is automatically copied as return address inside the functions (interrupt hanlder or syscall) stack
+   - `iret` (interrupt return) is a special instruction used to return control from an *interrupt service routine* (ISR)
+   -- thats why are handled in the same way as interrupts 
+
+*** Priveledges
+    - Kernel mode and User mode
+    - Hardware level security (checks priveledges for reading/writing memory contents)
+    - Hardware automatically changes priveledge level when we switch from kernel to user mode in `iret` and syscall
+    - Computer is still vulnerable at one moment: booot time
+
+*** TODO
+    - Draw lifecycle of a context switch
+    -- remember `cli`
+
+*** Questions
+    ~ *What are tiers (e.g; tier 0) in terms of priveledge levels?*
+
+    ---
+   ---
+  ---
+
+___
+
+* Readings
+
+** Scheduler Activations
+*** Key Points
+    ~ Argue that the performance of kernel threads in /inherently/ worse than user-level threads
+    ~ Problems encountered in integrating user-level threads with other system services is a consequence of the lack of kernel support for user-level threads 
+    ~ Design, implementation, and performance of a new kernel interface and user-level thread package that provides same functionality as kernel threads wihtout compromisong the flexibiity or performanece of user-level threads
+
+*** Glossary (personal)
+    - *SA*: scheduler activation
+    - *AS*: address space
+    - *TS*: user-level thread system
+    - *PA*: kernel processor allocator
+    - *UT*: user-level thread
+
+*** User Level Threads
+**** Pros 
+     - Provide flexibility
+     - Allow thread management to be customized to the needs of an application without kernel modification
+     - Provide high performance
+     -- because they are managed by runtime library routines and require no kernel intervention
+**** Cons
+     - integration problems with other system services
+
+*** Kernel Threads
+**** Pros
+     - provide a simple, well-understood abstraction for multiprogramming
+**** Cons
+     - Poor performance
+     - Inflexible
+
+*** Insights
+    - each UNIX-like process consists of a single:
+    -- AS
+    -- sequential execution stream
+    - UTs are managed by runtime library routines linked into each application
+    - user-level theads execute within the context of traditional processes
+    - thread package sees each process as a *virtual processor*, and treats it as a physical processor executing under its control
+    - each virtual processor runs user-level code that pulls threads off of ready list and runs them  
+    - in reality, these virtual processors are being multiplexed across actual physical processor by underlying kernel
+
+**** Goals
+     - in common case, where kenel intervention is not required, our threads perform essentially the same as best existing user-level threads
+     - when kernel intervention is required, our system can mimic kernel thread management system:
+     -- no processor idles in the presence of a ready thread
+     -- no low-priority thread runs when a high-priority thread is available
+     -- when a thread traps to the kernel to block, its processor can be used to run another ready thread (could be from a different AS)
+
+    - difficulty faced by authors: necessary control and scheduling information is distributed between the kernel and each application's AS
+    - goal is to demonstrate that the exact functionality of kernel threads can be provided at the user level
+    - kernel threads are the wrong /abstraction/ for supporting UT management because:
+    -- Kernel threads block, resume, and are preempted without notification to the user level.
+    -- Kernel threads are scheduled obliviously with respect to the UT state.
+    - *aspects of the abstraction:*
+    -- kernel has complete control over how many processors to give each AS
+    -- each TA has complete control over which threads to run on its allocated processors
+    -- PA notifies TA whenever:
+    --- PA changes the number of assigned processors
+    --- UT blocks or wakes up in the kernel (e.g; in I/O or page fault)
+    -- TA notifies kernel when it needs to change the number of assigned processors
+    --- notifications occur only on thread operations that can affect processsor allocation decisions
+    -- interface is exaclty the same as normal kernel threads to the application programmer 
+    - each vectored causes the TA to reconsider which threads to run which processors
+    - each SA has two stacks:
+    -- one mapped into the kernel
+    -- one mapped into the application AS
+    - when a UT calls into the kernel, it uses its activations's kernel stack
+    - *SA upcall points (list of events that the kernel vectors to the user-level using SA):*               (see Table II & Fig I - page 10)
+    -- add this processor
+    -- processor has been preempted
+    -- shceduler activation has blocked
+    -- shceduler activation has unblocked
+    - there are always exactly as many running /SAs/ (vessels for running UTs) as there are processors assigned to the AS.
+    -- (?) but /*Fig I*/ shows otherwise at T2
+    - when a UT is blocked in kernel or preempted, most of the state (thread stack and control block) need to resume is present in user-level, but the threads register state is saved by kernel's low-level routines (e.g; interrupt and page fault handlers). These are passed as args in the SA
+    - to reallocate a processor for a new AS, the kernel:
+    ~~ sends an interrupt to the processor
+    ~~ stops the old activation
+    ~~ uses the processor to do an upcall into the new AS with a fresh SA
+    ~~ notifies the old AS of the preemption:
+    ~~~ does another preemption on a different processor in the old AS
+    ~~~ uses it to do an upcall with a fresh SA, notifying the AS that /two/ UTs have been stopped
+    ~~~ when the last processor is preempted from an AS, we delay the notification until the kernel assigns it one
+    - an additional preempion is needed if the running thread ha lower priority than ready threads
+    ~~ TS asks the kernel to preempt the low-priority threads'processor
+    ~~ kernel uses that processor to do an upcall
+    ~~ TS can assign the processor to high-priority thread
+    - when a preemption or page fault occurs in user-level when no UT is running: - page 12
+    > Third, scheduler activations work properly...
+    - a blocked thread, when resumed, may still need to execute in kernel mode. The kernel delays the upcall until the thread leaves kernel mode
+    - Topaz kernel thread management o=routines were modified to implement SA
+    - *FastThreads* was modified to process upcalls, to resume interrupted critical sections and provide *Topaz* with the information needed for processor allocation decisions
+
+**** Notifying the Kernel of User-Level Events Affecting Processor Allocation
+     - AS notifies the kernel whenever it transitions to a state where it has more runnable threads than processors, or more processors than runnable threads
+     - list of kernel calls made by AS:             (see Table III - page 14)
+     ~~ Add more processors
+     ~~ This processor is idle 
+
+**** Approach
+     - provide each  application with a /virtual multiprocessor/
+     - kernel notifies the /address space thread scheduler/ of every kernel event affecting the address space
+     -- allow application to have complete knowledge of its scheduling state
+     - /thread system/ of each address space notifies /kernel processor allocator/ about only those user-level thread operations that can affect processor allocation decisions
+     - /scheduler activation/ vectors control from kernel to the /when does a scheduler activation block?address space thread scheduler/, on a kernel event
+
+*** Questions
+    - *whats a thread scheduler?*
+    - *what exactly is an address space?*
+    - *what is multiprogramming?*
+    - *what is a spin-lock?*
+    - *when does a scheduler activation block?*
+
+*** Referneces
+    - [Scheduler Activations: Effective Kernel Support for the User-Level Management of Parallelism]{/ /home/ehab/Documents/operating_systems/Scheduler.pdf}

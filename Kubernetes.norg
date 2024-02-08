@@ -1,0 +1,138 @@
+* Insights
+  - K8s does not manage persistance
+  - Look into CKA (Certified Kubernetes Administrator) and CKAD (Certified Kubernetes Application Developer) exams by the linux foundation
+
+  - *What is prometheus?*
+
+* Pros and Cons
+** Pros
+   - Provides scalability
+   - Provides high availability
+   - Fault tolerant (self recovery)
+   - Disaster recovery (backup and restore)
+
+* CLI
+  - To list resources (un)affected by namespace:
+  @code bash
+  kubectl api-resources --namespaced=[false|true]
+  @end
+
+  - To see additional info (including IP address) of a pod:
+  @code bash
+  kubectl get pods -o wide
+  @end
+
+  - To get endpoints of your services:
+  @code bash
+  kubectl get endpoints
+  @end
+
+* Components
+
+** Service 
+   - Each {** Pod} has its own single service
+   - Services have a static IP address
+   - Lifecycles of a {** Pod} and its service are not coupled
+
+*** Types
+    ~ Internal service
+    ~ External Service
+
+** Ingress
+   - Client requests come to ingress which forwards them to {** Service}s
+   -- because of damain names i guess
+
+** ConifgMap 
+   - Contains config information for {** Pod}s
+
+** Secret
+   - Same as {** ConfigMap} but stores secret information in bas64
+
+
+** Volumes
+   - Attaches a physical storage to your {** Pod}
+   - Storage may be internal or external (cloud or whatever)
+
+* Architecture
+
+  - [K8s Architecure]{/ /home/ehab/Pictures/k8s-architecture.png}
+
+** Pod
+   - Smallest deployable unit in k8s
+   - A pod hosts one or more containers, and provides shared storage and networking for those containers
+   - Usually 1 applciation (container) per pod
+   - Created and managed by k8s {** Control Plane}
+   - Each pod gets its own IP address
+   -- new IP address on recreation (after a crash)
+   - Pods are ephermal
+
+** Control Plane
+*** Core components
+    ~ API server
+    ~ etcd
+    ~ Scheduler
+    ~ Controller Manager
+
+*** API Server
+    - Primary interface between control plane and the rest of the cluster
+    - Exposes a RESTful API that allows clients (Admin UI or CLI) to:
+    ~~ Submit requests to the control plane
+    ~~ Manage the cluster
+
+*** ETCD
+    - Distributed key-value store
+    - Stores the cluster's persistent state
+    - Used by {*** API Server} and other components in the control plane to store and retreive information about the cluster
+
+*** Scheduler
+    - Responsible for scheduling {** Pod}s inside {** Worker Node}s in the cluster
+    - Uses info like resources required by the pod, and the available resources on the {** Worker Node} to make placement decisions
+
+*** Controller Manager
+    - Responsible for running controllers that manage the state of the cluster
+    - Examples:
+    ~~ {**** Replication Controller}
+    ~~ {**** Deployment Controller}
+
+**** Replication Controller
+     - Makes sure that the specified number of replicas of a pod are running
+**** Deployment Controller
+     - Manages rolling updates, rollbacks etc
+
+** Worker Node
+*** Core Components
+    ~ Kubelet
+    ~ Container runtime
+    ~ Kube-proxy
+
+*** Kubelet
+    - A daemon that runs on each worker node
+    - Responsible for communicating with the {** Control Plane} (via the API Server)
+    - Receives instructions from the {** Control Plane} about which {** Pod}s to run and ensures their desired state is maintained
+
+*** Container Runtime
+    - Runs containers on a worker node
+    - Responsible for:
+    ~~ pulling images from the registry
+    ~~ starting and stopping containers
+    ~~ managing the container's resources
+
+*** Kube-proxy
+    - A network proxy present on all worker nodes
+    - Responsible for routing traffic to the correct {** Pod}s
+    - Also provides load-balancing for the {** Pod}s
+
+* Running Local
+** Steps
+   ~ Install `kubectl`
+   -- [install kubectl linux]{https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-binary-with-curl-on-linux}
+   ~ Install `minikube`
+   -- [Minikube start]{https://minikube.sigs.k8s.io/docs/start/}
+   ~ Install `virtualbox` or any hypervisor among `virtualbox, kvm2, qemu2, qemu, vmware, none, docker, podman, ssh`
+   -- [How to Install VirtualBox on Ubuntu]{https://phoenixnap.com/kb/install-virtualbox-on-ubuntu}
+   -- To resolve the error `` refer to {https://stackoverflow.com/questions/60350358/how-do-i-resolve-the-character-device-dev-vboxdrv-does-not-exist-error-in-ubu}
+
+
+* Resources
+  - [Kubernetes Tutorial for Beginners [FULL COURSE in 4 Hours]]{https://www.youtube.com/watch?v=X48VuDVv0do&t=9496s}
+  - [What is Knative?]{https://www.youtube.com/watch?v=69OfdJ5BIzs}

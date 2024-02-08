@@ -1,0 +1,30 @@
+
+** (x) Useful flags
+   - *-i --ignore-case*
+   - *-r --recursive*
+   - *-l* print file names with matches
+   - *-H --with-filename* print the file name along with each match
+   - *-L --files-without-match* print files that DO NOT contain any matches
+   - *-c --count* print count of matching lines for each file
+   - *-I --binary-files=without-match* useful when you want to exclude binary files, which is normally the case.
+   - *-w --word-regexp* Select only those lines containing matches that form whole words.
+   - *--color* Display the matched (non-empty) strings, matching lines, context lines, file names, line numbers, byte offsets, and separators in color.
+   - (_) *--mmap* use mmap() to read input, instead of the default read() system call.
+   > So even nowadays, using --mmap can be worth a >20% speedup.
+
+** (_) Use cases
+   - search for a specific line in a string
+   -- example 
+   - remove all files that [do not] match a pattern
+   -- example
+   - search for a file in a directory
+   -- Often times, you do not know the full name of a file, instead you only know the first few characters or the extension. You can ls the directory and pipe the output to grep to search for matching file name.
+   -- example
+
+** Footer
+   - further readings
+   -- [grep tutorial]{https://www.cyberciti.biz/faq/howto-use-grep-command-in-linux-unix/}
+   -- [Why GNU grep is fast]{https://lists.freebsd.org/pipermail/freebsd-current/2010-August/019310.html}
+   - references
+   -- [man page]{https://man7.org/linux/man-pages/man1/grep.1.html}
+   -- [GNU grep]{https://www.gnu.org/software/grep/manual/grep.html}
