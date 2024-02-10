@@ -17,5 +17,7 @@
   - {:Database:}
   - {:Docker:}
   - {:AWS:}
+  - {:Distributed-Caches:}
+  - {:Prometheus:}
   - {:Kubernetes:}
   - {:GSOC-Knative:}

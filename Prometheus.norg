@@ -1,0 +1,20 @@
+
+- Uses YAML based configuration
+
+* Introduction
+  - [How Prometheus Monitoring Works]{https://www.youtube.com/watch?v=h4Sl21AKiDg}
+
+* Architecture
+** Retreival
+   - pull smetrics from targets
+
+** HTTP Server
+   - handles queries on Time Series Database
+   - clients use the *Prom Query Language*
+
+** Storage
+   - stores metric in a Time Series Database
+
+** Integration
+   - Can be integrated with k8s clusters, custom APIs, databases, ngnix servers etc
+   - Yo can use the Prometheus Web UI or Grafana (more powerful) as your dashboard

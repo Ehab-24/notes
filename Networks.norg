@@ -40,3 +40,16 @@
 
 *** Holes
     - (?) what is low-pass filtering
+
+
+    ---
+   ---
+___
+
+* Personal
+
+** HTTP3
+*** Resources
+    - [Go http3]{https://pkg.go.dev/github.com/lucas-clemente/quic-go/http3}
+    - [How to Get Started with HTTP/3]{https://thenewstack.io/how-to-get-started-with-http3/}
+
