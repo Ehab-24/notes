@@ -19,8 +19,9 @@
       --- Example; for voice signals, we only need 64 bits/sec of transmission throughput
       -- *frequency:* assing a unique radio frequency to each client
 ***** Packet switching
-      - break down messages into smaller packets
-      - assign destination address to each packet
+      - main tasks:
+      ~~ break down messages into smaller packets
+      ~~ assign destination address to each packet
       - channel is shared by all (no dedicated channels)
       - packets may be delayed (when traffic is high) -> not predictable
 
@@ -42,14 +43,26 @@
     - (?) what is low-pass filtering
 
 
+** Lecture 2
+   - Revision
+   ~~ Channel
+   ~~ {***** Circuit switching}
+   ~~ {***** Packet switching}
+
+   - Transport Layer: for packet multiplexing across processes, i.e; /Process to OS/ OR /Process to Network/ multiplexing
+   - Network Layer: For routing
+   - How packets are sent from source to destination across a network -> see slides
+   -- which layers are responsible for which tasks
+   -- what are the different devices present in the network
+   -- how different layers assign headers to packets and where these headers are picked and removed/updated
+   -- see /Hussein Nasser's/ video
+
+
     ---
    ---
 ___
 
 * Personal
 
-** HTTP3
-*** Resources
-    - [Go http3]{https://pkg.go.dev/github.com/lucas-clemente/quic-go/http3}
-    - [How to Get Started with HTTP/3]{https://thenewstack.io/how-to-get-started-with-http3/}
+  {:HTTP:}
 

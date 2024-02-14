@@ -1,0 +1,61 @@
+
+* Steps to Designing a System
+  ~ *High-Level design:*
+  ~~ Start by identifying {* Functional Requirements} and {* Non-Functional Requirements}
+  ~~ Identify actors: users, admins etc
+  ~~ Identify their use cases
+  ~~ Identify metrics
+  ~~~ DAUs
+  ~~~ Total users
+  ~~~ Total size of data (relational data, blobs etc)
+  ~~~ Requests per second
+  ~~ Identify High-level components
+  ~~~ Database
+  ~~~ API Server
+  ~~ Identify APIs (endpoints with arguments) for use cases
+  ~~ Refine Services for those APIs
+  ~~ Identify traits of each service
+  ~~~ Sclability
+  ~~~ Availability
+  ~~~ Persistence
+  ~~~ Consistency
+  ~~~ Extensibility
+  ~~ Identify the network protocols
+  ~~ Isolate components of your system
+  ~~ Identify deployment strategy
+  ~~ Identify development strategy
+  ~ *Low-level design:*
+  ~~ Dive deep into each component
+  ~~ Identify resource comsumption by each component
+  ~~~ Time
+  ~~~ Money
+  ~~~ Man power
+  ~~ Identify software design for each component
+  ~~~ Programming Language
+  ~~~ Software desgin patterns
+
+
+* Functional Requirements
+  - Same as use cases I think
+
+* Non-Functional Requirements
+  - High availability
+  - Low latency
+  - Secured connection
+
+
+* Resources
+  - 󰓎 [System Design for Twitter (Timeline, Live Updates, Tweeting) | System Design Interview Prep]{https://www.youtube.com/watch?v=_QqpD0w8oPM}
+  - 󰓎 InterviewReady x FreeCodeCamp: [System Design for Beginners Course]{https://www.youtube.com/watch?v=m8Icp_Cid5o}
+  - Course by InterviewReady: [System Design Simplified]{https://interviewready.io/course-page/system-design-course}
+  - [Algorithms You Should Know Before System Design Interviews]{https://www.youtube.com/watch?v=xbgzl2maQUU&pp=ygUfYmV0cyByZXNvdXJjZXMgb24gc3lzdGVtIGRlc2lnbg%3D%3D}
+  - [Design Youtube - System Design Interview]{https://www.youtube.com/watch?v=jPKTo1iGQiE}
+  - [Vitess History]{https://vitess.io/docs/18.0/overview/history/}
+  - [Anatomy of a Production App - System Design]{https://www.youtube.com/watch?v=akXP6pC0piE}
+  - Live mock interview: [Google system design interview: Design Spotify (with ex-Google EM)]{https://www.youtube.com/watch?v=_K-eupuDVEc}
+  - Harkirat Singh: [Code along - I built Vercel in 4 Hours]{https://www.youtube.com/watch?v=c8_tafixiAs}
+
+** Books
+   - [Clean Architecture]{/ ~/Documents/system_design/Clean Architecture A Craftsman Guide to Software Structure and Design.pdf}
+   - 󰓎 [Clean Architecture]{/ ~/Documents/system_design/System Design Interview An Insider’s Guide by Alex Xu (z-lib.org).pdf}
+   - [Clean Architecture]{/ ~/Documents/system_design/system-design-interview-an-insiders-guide-volume-2-1736049119-9781736049112_compress.pdf}

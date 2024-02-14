@@ -143,6 +143,16 @@
    *Q8: When you talk about maintainability of a large system with many components, name the design principles you would engage from OOP that would help to keep the system easily extendable and easy to maintain?*
    Encapsulation. Encapsulation would help us write each component of the system as a separate module. These modules are independent of one another, individually extendable, and hide their inner complexity from client components.i
 
+** Lecture 5
+   - Chit chat about reliability, scalability and maintainability
+   -- maintainability is only significant in large code bases
+   $ ChaosMonkey
+   An open-source software program Netflix uses to deliberately overload their servers for testing purposes.
+   - The leap second crash
+   -- Reddit's servers running on linux crashed. 
+   -- Bug in linux kernel
+   -- Started waking up all applications due to "1sec difference between system clock and timer interrupt."
+   - Class assignment
 
    ---
   ---
@@ -152,7 +162,7 @@ ___
 
 
 * Raft
-  {:Raft:}
+  - {:Raft:}
 
 
 * Zookeeper

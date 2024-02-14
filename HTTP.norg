@@ -32,7 +32,7 @@
 * HTTP/3
 
 ** Architecture
-   - IP -> UDP -> QUIC -> HTTP/3
+   - IP -> UDP -> QUIC (+TLS 1.3) -> HTTP/3
 
 *** QUIC
     - uses TLS 1.3 for encryption
@@ -43,13 +43,16 @@
     -- QUIC can be updated without updating the kernel which means faster adoption of new features
     -- However, QUIC is not as optimized as TCP and UDP
     - Unique connection id: IP address + port number + connection id 
-    
+
 **** Advantage
      - QUIC is connectionless and leverages UDP, which means that it can be used to send multiple HTTP requests on a single connection without waiting for the previous response to arrive
      - In case of packet loss, only the stream that lost the packet needs gets blocked, not the entire connection. Therefore, you get stream compaction instead of entire connection compaction.
 
 ** References
    - [What are QUIC and HTTP/3?]{https://www.nginx.com/resources/glossary/quic-http3/}
+   - [Go http3]{https://pkg.go.dev/github.com/lucas-clemente/quic-go/http3}
+   - 󰜮 [How to Get Started with HTTP/3]{https://thenewstack.io/how-to-get-started-with-http3/}
 
 
 * Congestion control
+

@@ -22,7 +22,7 @@
     - (x) more content on homepage
     -- (x) event timeline
     -- (_) ...
-    - (-) registration email
+    - (x) registration email
     -- (x) when a team pays the registration fee (manual)
     - (x) registration form
     -- (x) level 4
@@ -31,9 +31,7 @@
     --- (x) details of payment
     - (-) Web hackathon man page
     -- (_) Zain?
-    -- ( )   
-    - ( ) Competitive programming man page
-    -- (?) Saad?
+    - (-) Competitive programming man page
 
 ** Admin Dashboard (Website)
 
