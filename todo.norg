@@ -1,7 +1,8 @@
 * Ongoing
-  - read about [HPET]{https://en.wikipedia.org/wiki/High_Precision_Event_Timer}
-  - continue reading Distributed Systems book
+  - (x) read about [HPET]{https://en.wikipedia.org/wiki/High_Precision_Event_Timer}
+  - Continue reading Distributed Systems book
   - Read all OS papers
+  -- ( ) Read: [MapReduce]{/ /home/ehab/Documents/distributed_systems/MapReduce.pdf}
 
 * 2024-02-11
   - Watch: [The Unspeakable Things That Happened In Unit 731]{https://www.youtube.com/watch?v=-BpKixUKbU8}
@@ -9,6 +10,20 @@
   - (x) Watch: [Marcus Aurelius: The Man Who Solved the Universe]{https://www.youtube.com/watch?v=tv6W0Nv5ev0}
 
 * 2024-02-13
-  - Read: [MapReduce]{/ /home/ehab/Documents/distributed_systems/MapReduce.pdf}
-  - Read: [GFS]{/ /home/ehab/Documents/distributed_systems/GFS.pdf}
-  - Lecture notes
+  - (x) Read: [GFS]{/ /home/ehab/Documents/distributed_systems/GFS.pdf}
+  - ( ) Lecture notes
+
+* 2024-02-14
+  - (x) GFS notes {:Distributed-Systems:* GFS}
+
+* 2024-02-15
+  - ( ) Quiz: {:Advanced-Operating-Systems:** Scheduler Activations}
+  - Worker Pools in Go
+  -- (x) impleemnt a simple worker pool
+  -- refine and document the impleemnt architecture
+  -- explore a second architecture that exploits fan-out
+  - Worker Pools in microservices
+  - Deployment on bare metal
+  -- How to deploy with Ansible
+  -- How to automate with Jenkins
+  -- How to monitor using {:Prometheus:} and Grafana

@@ -1,0 +1,80 @@
+
+* System Interactions
+
+** Leases and mutation order
+   - See diagram on page 6
+
+** Data flow
+
+** Atmoic Record Appends
+
+** Snapshot
+
+   $ Source
+   The chunk C to snapshot
+
+   - How it works:
+   ~~ Master revokes any outstanding leases on the chunks it is about to snapshot
+   --- Ensures that any subsequent qrites to these chunks must go throught the master, in order to find the lease holder
+   ~~ Applies the operation to its log and in-memory
+   --- Duplicates metadata of {$ Source}
+   --- New snapshot points to the same files as the {$ Source}
+   ~~ When a client writes to C:
+   --- Master sees that C has more than one references and defers client operation
+   --- Master creates a new chunk handle for C'
+   --- Master asks all replica chunkservers of C to create a new chunk C'
+   --- Client writes to C'
+
+* Master Operation
+** Namepspace Management and Locking
+   - Same concept as Rust's ownership and borrowing
+   - Each read requires a read lock, each write requires a write lock associated with the file/directory
+   -- Example; to write /home/user/foo -> master acquires read lock on /home and /home/user, and write lock /home/user/foo
+   - At any time, the master can either have a single writer and multiple readers
+   - There is no "directory" structure in GFS
+   -- Instead, the master maintains a flat Namepspace
+   -- Therefore, we don't need write lock on parent directory when we create/rename/snapshot a file
+
+** Replica Placement
+   Replicas should be placed accross different racks
+   - *Purposes:*
+   ~~ Maximize data reliability and availability
+   ~~ Maximize network bandwidth
+   - *Advantages:*
+   ~~ A chunk read can exploit aggregate bandwidth of multiple racks
+   ~~ Prevents failover when a complete racks fails
+   - *Disadvantages:*
+   ~~ Write traffic had to flow through multiple racks
+
+** Creation
+   Master considers the following factors when it creates a chunk:
+   ~ Place new replicas on chunkservers with below-average disk space utilization
+   ~ Limit the number of "recent" creations on each chunkserver
+   ~ Speard replicas across racks
+** Re-replication
+   - Master re-replicates a chunk as soon as the number of available replicas fall below a user-specified (configurable) goal.
+   - Chunks with higher pririty are replicated first
+   - Chunks that lost 2 replicas have higher priority than those that lost only 1
+   - Chunks blocking any client progress have higher priroty
+   - New replica is placed with same goals as in {** Creation}
+** Rebalancing
+   - Master rebalances replicas periodically
+   - Moves replicas for better disk space load balancing
+   - Master also has to choose which replica to remove
+   -- Removes the one with below-average free space
+
+** Stale Replication Detection
+   - For each chunk, master maintains a /chunk version number/
+   - Master increments the chunk version number when it gives a lease on the corresponding chunk
+   - For security against stale reads, the Master includes chunk version number when:
+   ~~ It informs a client of which chunkserver holds the lease
+   ~~ It instructs a chunkserver to read to read the chunk from another chunkserver in a cloning operation
+
+* Garbage Collection
+  - When a file is deleted, master immediately records deletion in its log but does not reclaim resources. Instead, it only renames the file to a hidden name
+  - During file system namespace scan; the master removes any hidden files deleted over 3 days ago <- configurable
+  - When a hidden file is deleted, its in-memory metadata is erased
+  -- This severs the file's links to all its chunks
+  - During chunk namespace scan; master erases metadata for orphaned chunks
+  - In hearbeat messages; chunkserver reports (a subset of) its chunks to master -> master replies with id of all chunks absent in its metadata -> chunkserver removes these chunks
+

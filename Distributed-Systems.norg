@@ -25,7 +25,7 @@
 ** Lecture 3
 *** Class Assigment (Assignment 3)
     *a) Name two data systems designed and used by any of the two companies mentioned above. You may use Google for this.*
-    1. Large scale usually use a distributed file system for large data storage such as Hadoop Distributed File System (HDFS) or Google File System (GFS)
+    1. Large scale usually use a distributed file system for large data storage such as Hadoop Distributed File System (HDFS) or Google File System {* GFS}
     2. Large scale also use distributed databases for large data storage such as HBase or Cassandra which implement algorithms like RAFT or zookeeper behind the scene to ensure data consistency in a distributed environment
 
     *b) What does agile mean? What is meant by "keeping development cycles short"?*
@@ -160,6 +160,8 @@
 
 ___
 
+* GFS
+  - {:GFS:}
 
 * Raft
   - {:Raft:}
