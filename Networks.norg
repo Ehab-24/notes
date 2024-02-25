@@ -22,6 +22,8 @@
       - main tasks:
       ~~ break down messages into smaller packets
       ~~ assign destination address to each packet
+      ~~ Segment large payloads into smaller packets and (optionally) reassemble on recieve
+      -- (?) Is this whole step optional
       - channel is shared by all (no dedicated channels)
       - packets may be delayed (when traffic is high) -> not predictable
 
@@ -57,6 +59,63 @@
    -- how different layers assign headers to packets and where these headers are picked and removed/updated
    -- see /Hussein Nasser's/ video
 
+** Lecture 3 - 2024-02-12
+*** Revision
+    -  Channel
+    - {***** Circuit Switching}
+    - {***** Packet Switching}
+
+    - For process to OS or process to network multiplexing -> Transport Layer
+    - For routing -> Network Layer
+    - How packets are sent from sender to receiver
+    -- Watch: [Following an HTTP GET / through Switches, Routers, Gateways, and Proxies (Detailed Examples) Hussein Nasser]{https://www.youtube.com/watch?v=98B6P_QAh68}
+ 
+
+** Lecture 4 - 2024-02-13
+   - Two archiectures of network applications:
+   ~~ Client-Server
+   ~~ Peer-to-peer
+
+   - Sockets:
+   -- A socket is just a `socket_id` (an integer)
+   -- `socket_id` is the combination of *src.port*, *src.ip*, *dst.port* and *dst.ip*
+   - [Tasks of Transport Layer]{***** Packet Switching}
+   - Web and HTTP
+
+
+* Lecture 5 - 2024-02-19
+
+  Content we covered:
+
+  ~ {:HTTP:* Properties of HTTP}
+  ~ Web caches
+  -- Proxy servers
+  -- cache servers forward each request to the origin server, with `If-Modified-Since` header and the origin responds with either *200 OK* or *304 Not Modified*
+  --- /*personal*/ OR origin server can invalidate cache itself
+  ~ SMTP
+  -- Used for email delivery
+  -- /IMAP/ or /Pop3/ are used for email retreival
+  ~ Sample SMTP interaction
+  ~ {:DNS:}
+
+
+* Lecture 6 - 2024-02-20
+  ~ DNS protocol messages:
+  ~~ Identification
+  ~~ Flags
+  ~~ Multiple questions in the same message
+  ~ DNS Security
+  ~~ DDoS
+  ~~ Spoofing
+  ~ P2P Applications 
+  ~~ Advantages over Client-Server model
+  ~~ File distribution time example: Client-Server vs P2P
+  ~ BitTorrent
+  ~~ Trackers -> volunteer peers or centralized servers
+  ~~ Choking/unchoking peers
+  ~~ Files are divided 256kB chunks
+
+
 
     ---
    ---
@@ -65,4 +124,19 @@ ___
 * Personal
 
   {:HTTP:}
+
+  {:VPN:}
+
+  {:WireGuard:}
+
+* Insights
+  - *What is external IP? Is there an internal IP as well?*
+  - *For what purposes are the LAN and WAN addresses of a router used for?*
+  - *Can we add an IPv6 DNS server?*
+  - *What happens when a DHCP lease expires?*
+  - *Whats the difference between /address/ and /route/ in the `ip` command?*
+  - *What is the Difference between Multicast, Unicast and Broadcast?*
+  - *Difference between primary and secondary DNS server for a router*
+
+  - [Following an HTTP GET / through Switches, Routers, Gateways, and Proxies (Detailed Examples)]{https://www.youtube.com/watch?v=98B6P_QAh68}
 

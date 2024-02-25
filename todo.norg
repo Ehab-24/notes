@@ -1,8 +1,17 @@
 * Ongoing
   - (x) read about [HPET]{https://en.wikipedia.org/wiki/High_Precision_Event_Timer}
-  - Continue reading Distributed Systems book
-  - Read all OS papers
-  -- ( ) Read: [MapReduce]{/ /home/ehab/Documents/distributed_systems/MapReduce.pdf}
+  - (-) Read Distributed Systems book
+  - (-) Read all OS papers
+  - Understand network congestion
+  - Build Youtube
+  - Build a VPN
+
+** This Week - 2024-02-18
+   - Get course outlines for:
+   -- CPS
+   -- Automata
+   -- Networks
+   -- Adv OS
 
 * 2024-02-11
   - Watch: [The Unspeakable Things That Happened In Unit 731]{https://www.youtube.com/watch?v=-BpKixUKbU8}
@@ -11,19 +20,131 @@
 
 * 2024-02-13
   - (x) Read: [GFS]{/ /home/ehab/Documents/distributed_systems/GFS.pdf}
-  - ( ) Lecture notes
+  - (x) Lecture notes
 
 * 2024-02-14
   - (x) GFS notes {:Distributed-Systems:* GFS}
+  - (x) Lecture notes
 
 * 2024-02-15
-  - ( ) Quiz: {:Advanced-Operating-Systems:** Scheduler Activations}
-  - Worker Pools in Go
+  - (x) Quiz: {:Advanced-Operating-Systems:** Scheduler Activations}
+  - (-) Worker Pools in Go
   -- (x) impleemnt a simple worker pool
-  -- refine and document the impleemnt architecture
-  -- explore a second architecture that exploits fan-out
+  -- (x) refine the implemented architecture
+  -- ( ) document the implemented architecture
+  -- (x) explore a second architecture that exploits fan-out
+  --- *Insight:* Not very flexible as you have to hardcode channels in `select` statement
+  - (x) Read: [MapReduce]{/ /home/ehab/Documents/distributed_systems/MapReduce.pdf}
   - Worker Pools in microservices
   - Deployment on bare metal
   -- How to deploy with Ansible
   -- How to automate with Jenkins
   -- How to monitor using {:Prometheus:} and Grafana
+  - (x) Test coderush website
+  - (x) Lecture notes
+  - ( ) Watch: [I've been using Redis wrong this whole time...]{https://www.youtube.com/watch?v=WQ61RL1GpEE}
+  - ( ) Watch: [#21 Golang - Concurrency: Pipeline Pattern]{https://www.youtube.com/watch?v=8Rn8yOQH62k}
+
+* 2024-02-16
+  Just uni
+
+* 2024-02-17
+  - ( ) read about the XY problem
+  - (-) watch: [Jordan Peterson - The Keys to Growth, Emotional Resilience & Finding Purpose | Modern Wisdom 436]{https://www.youtube.com/watch?v=laSK7Pxh0_8}
+  - (x) Stoicism:
+  -- (x) Watch: [Stoicism: Become Undefeatable]{https://www.youtube.com/watch?v=EFkyxzJtiv4}
+  -- (x) Watch: [The philosophy of Stoicism - Massimo Pigliucci]{https://www.youtube.com/watch?v=R9OCA6UFE-0}
+  - Become more articulate:
+  -- ( ) Watch: [Jordan Peterson Teaches a Shy Kid How to Communicate]{https://www.youtube.com/watch?v=Fnt6P7Rnho8}
+  -- ( ) Watch: [Think Fast, Talk Smart: Communication Techniques]{https://www.youtube.com/watch?v=HAnw168huqA&t=1402s}
+  - (x) Read [OSS-Fuzz documentation]{https://google.github.io/oss-fuzz/}
+
+* 2024-02-18
+  - (x) Read: {https://google.github.io/oss-fuzz/advanced-topics/code-coverage/}
+  - (x) Read: {https://google.github.io/oss-fuzz/advanced-topics/debugging/}
+  - (x) Read: {https://google.github.io/oss-fuzz/advanced-topics/reproducing/}
+  - (x) Read: {https://google.github.io/oss-fuzz/further-reading/clusterfuzz/}
+  - (x) Read: {https://google.github.io/oss-fuzz/advanced-topics/ideal-integration/}
+  - How to get real-time updates from mongodb
+  -- [4 ways to get real-time database updates from MongoDB]{https://leocode.com/development/4-ways-to-get-real-time-database-updates-from-mongodb/}
+  - read about RTMP
+  -- [A Complete Guide To RTMP: What Is It and When to Use It?]{https://wave.video/blog/rtmp-guide/}
+  - MPEG-DASH vs HLS vs Microsoft Smooth Streaming vs HDS
+  -- [Here’s What You Need to Know About Streaming Protocols]{https://www.dacast.com/blog/streaming-protocols/}
+  -- [Setting up adaptive streaming media sources]{https://developer.mozilla.org/en-US/docs/Web/Media/Audio_and_video_delivery/Setting_up_adaptive_streaming_media_sources}
+  - (x) Encoding vs Transcoding
+  - (-) Watch: [Code Repl.it Beginner to Advance (Kubernetes, Docker, Node.js)]{https://www.youtube.com/watch?v=s0kBqGpThp0}
+  - (?) Watch: [How to Get Your Brain to Focus | Chris Bailey | TEDxManchester]{https://www.youtube.com/watch?v=Hu4Yvq-g7_Y}
+  - (x) Read System Design Chapter 14
+  -- {:System-Design:* References}
+  - What are Pre-defined URLs?
+
+* 2024-02-19
+  - (x) Analyze free hours per week
+  - Analyze free hours for Ramadan as well
+  - See how to reduce uni time
+  - See what course contents to study beforehand
+  -- (_) Is this needed? We could do it after Ramadan if not now
+  -- (-) Ask for course outlines
+  - See how to utilize absents
+  - (_) Ask Saad for contact
+  - (-) Understand VPNs, proxies, switches, routers etc
+  - (-) Understand wireguard
+  - (-) Read/Watch: {:VPN:* References}
+  - Watch: [Nix and NeoVim]{https://www.youtube.com/watch?v=T58Yr5igNGk}
+  - Security profiles and iptables to control firewall settings
+  - (x) Test level4 labs for Coderush24
+  - (x) Add version control to tmux config
+  - (x) Lecture notes
+
+* 2024-02-20
+  - (x) Update resume
+  - (x) Send resume to Sharjeel Qureshi
+  - Coderush final preparations for web
+  - (_) Lecture notes
+
+* 2024-02-21
+  - (x) Fly through *Missing Semester Course* {https://missing.csail.mit.edu/}
+  - (x) Reply Zain Razzaq's questions
+  -- (-) Also add to website
+  - (x) Registrations to CSV download button
+  - (x) Add approve/cancel buttons to {https://gdsc-admin.vercel.app}
+  - (x) Remove delete application button
+  - (x) Install mongodb
+  - (x) Install mongosh
+  - (x) Setup mongodb locally
+  - (x) What to do about EarlyBird and BaseFee?
+
+* 2024-02-22
+  - (x) add team lead email/phone to csv file
+  - (x) 40% discount on ITUSTD and GDSC ambassador codes
+  - (x) 6:30 online interview
+
+* 2024-02-23
+  - (x) Networks assignment
+  - (x) GDSC Admin frontend
+  - (-) setup golang debugger
+  - (x) learn `pdb`
+  - (x) learn `gdb`
+  - (-) Coderush Marketing
+  - (x) Go through {https://missing.csail.mit.edu/2020/debugging-profiling/} in detail
+  - refactor neorg config in .config/nvim
+  - (_) Lecture notes
+
+* 2024-02-24
+  - (x) [Wireguard]{/ /home/ehab/Documents/wireguard.pdf}
+  - (_) Watch: [The purest coding style, where bugs are near impossible]{https://www.youtube.com/watch?v=HlgG395PQWw}
+
+* 2024-02-25
+  - ( ) Debugging notes
+  - (-) Profiling notes
+  - (-) [Wireguard]{/ /home/ehab/Documents/wireguard.pdf}
+  - (-) Understand server certificates and keys
+  - Throughly Read: [Version Control (Git)]{https://missing.csail.mit.edu/2020/version-control/}
+  - Throughly Read: [Metaprogramming]{https://missing.csail.mit.edu/2020/metaprogramming/}
+  - (x) How to connect to your home router as an admin
+  -- (x) [How to Connect to Your Home Router as an Administrator]{https://www.lifewire.com/accessing-your-router-at-home-818205}
+  - Setup ssh key 
+  - Coderush website: Add member2, member3 email columns in csv
+  - (x) Lecture notes
+  -- (_) ToA

@@ -63,8 +63,8 @@
 
 ** Insights
 
-   - *Personally Identifiable Information:*
-   -- Personally Identifiable Information (PII) refers to any information that can be used to identify an individual. Example: Name, contact info, SSN, DOB, IP addr, biometrics, passport no., license no. etc
+   $ Personally Identifiable Information
+   Personally Identifiable Information (PII) refers to any information that can be used to identify an individual. Example: Name, contact info, SSN, DOB, IP addr, biometrics, passport no., license no. etc
 
    - *what is Control Plane?*
    -- {** Control Plane}
@@ -138,4 +138,5 @@
 
   - [Opportunities in GSOC 2024 | Github]{https://github.com/cncf/mentoring/discussions/1093}
   - [Ideas list]{https://github.com/cncf/mentoring/blob/main/programs/summerofcode/2024.md#ideas}
-  - 󰓎 [CNCF GSOC Admin Tasks]{https://github.com/cncf/mentoring/issues/1119} 
+  - NCF GSOC Admin Tasks]{https://github.com/cncf/mentoring/issues/1119} 
+  - 󰓎 [Project Ideas]{https://github.com/cncf/mentoring/blob/main/programs/summerofcode/2024.md#ideas}

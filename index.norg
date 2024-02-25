@@ -22,4 +22,11 @@
   - {:Distributed-Caches:}
   - {:Prometheus:}
   - {:Kubernetes:}
+  - {:Rules:}
+  - {:Philosophy:}
+  - {:VPN:}
+  - {:bash:}
+  - {:regex:}
+  - {:profiling:}
+  - {:WireGuard:}
   - {:GSOC-Knative:}

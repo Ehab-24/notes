@@ -1,0 +1,20 @@
+
+** DNS
+   - Services it provides
+   -- hostname-to-ip translation
+   -- load splitting
+   -- /alias/ to /canonical server/ mapping
+   -- mail server aliasing
+   - How DNS Resolution works
+   -- [How a DNS Server (Domain Name System) works.]{https://www.youtube.com/watch?v=mpQZVYPuDGU}
+   - DNS records
+   -- formats       *RR format: (name, value, type, ttl)*
+   ~~~ Type A -> converts domain name to IP address.
+   ~~~ Type NS -> allows you to delegate a subdomain of your domain to a nameserver not associated with the domain itself.
+   ~~~ Type CNAME -> converts alias to canonical domain name.
+   ~~~ Type MX -> specifies the mail server responsible for accepting email messages on behalf of the domain name.
+   - Iterative and Recursive DNS
+
+*** Glossary
+    $ RR
+    Resource record

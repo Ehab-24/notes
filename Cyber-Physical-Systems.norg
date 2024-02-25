@@ -1,14 +1,50 @@
 
-** Lecture 2
-   - We have 2 steps:
-   ~~ Identufy the quantities: {*** Control variables} and {*** State variables}
-   ~~ Identify the model: mathematical equationsthat define the {*** Dynamics} of the system
+* Lecture 2
+  - We have 2 steps:
+  ~~ Identufy the quantities: {*** Control variables} and {*** State variables}
+  ~~ Identify the model: mathematical equationsthat define the {*** Dynamics} of the system
 
-*** Control variables
-    - *Definition:* Directly controlled by us
+** Control variables
+   - *Definition:* Directly controlled by us
 
-*** State variables
-    - *Definition:* Derived from control variables
+** State variables
+   - *Definition:* Derived from control variables
 
-*** Dynamics
-    - *Definition:* how state changes over time
+** Dynamics
+   - *Definition:* how state changes over time
+
+* Lecture 4 - 2024-02-15
+  - Hybrid systems
+  -- Discrete Automata
+  -- Differentiable systems -> ODEs
+
+* Lecture 5 - 2024-02-19
+
+** Content we covered
+   ~ {$ Closed loop control}
+   ~ {$ Open loop control}
+   ~ {$ Optimization}
+   ~ {$ Model Prediction Control}
+   ~ Centralized Control Scheme
+   ~ Distributed Control Scheme
+   ~ Simplex Control Architecture
+   ~~ Example projects
+
+   ---
+
+  $ Closed loop control
+  State info is available
+
+  $ Open loop control
+  where control system neither has a state nor a way to gain any state. It only has an initial state.
+
+  $ Optimization
+  Maximize/minimize a mathematical cost function 
+
+  $ Model Prediction Control
+  At time `t`, find next `k` best predictions.
+  -- Add new behaviours to an agent by adding together the cost functions of each behaviour.
+
+* Lecture 6 - 2024-02-22
+  - (Mathematical) Functions
+  - Differential Equations

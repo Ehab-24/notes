@@ -44,7 +44,7 @@
   - Secured connection
 
 
-* Resources
+* References
   - 󰓎 [System Design for Twitter (Timeline, Live Updates, Tweeting) | System Design Interview Prep]{https://www.youtube.com/watch?v=_QqpD0w8oPM}
   - 󰓎 InterviewReady x FreeCodeCamp: [System Design for Beginners Course]{https://www.youtube.com/watch?v=m8Icp_Cid5o}
   - Course by InterviewReady: [System Design Simplified]{https://interviewready.io/course-page/system-design-course}
@@ -55,7 +55,6 @@
   - Live mock interview: [Google system design interview: Design Spotify (with ex-Google EM)]{https://www.youtube.com/watch?v=_K-eupuDVEc}
   - Harkirat Singh: [Code along - I built Vercel in 4 Hours]{https://www.youtube.com/watch?v=c8_tafixiAs}
 
-** Books
-   - [Clean Architecture]{/ ~/Documents/system_design/Clean Architecture A Craftsman Guide to Software Structure and Design.pdf}
-   - 󰓎 [Clean Architecture]{/ ~/Documents/system_design/System Design Interview An Insider’s Guide by Alex Xu (z-lib.org).pdf}
-   - [Clean Architecture]{/ ~/Documents/system_design/system-design-interview-an-insiders-guide-volume-2-1736049119-9781736049112_compress.pdf}
+  - [Clean Architecture]{/ ~/Documents/system_design/Clean Architecture A Craftsman Guide to Software Structure and Design.pdf}
+  - [Clean Architecture]{/ ~/Documents/system_design/system-design-interview-an-insiders-guide-volume-2-1736049119-9781736049112_compress.pdf}
+  - 󰓎 [Clean Architecture]{/ ~/Documents/system_design/System Design Interview An Insider’s Guide by Alex Xu (z-lib.org).pdf}

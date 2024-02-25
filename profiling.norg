@@ -1,14 +1,97 @@
-* CPU
-  - hyperfine --- to measure the execution time of a program
-  -- better than *criterion* for rust programs?
-  - valgrind
+* Hyperfine
+  To quickly measure execution time of a cli apps
+  @code bash
+  hyperfine 'ls' 'ls -a'
+  @end
+
+* Valgrind
   -- kcachegrind --- to visualize the output of valgrind
 
-** References
-- [Profiling Rust Programs with valgrind, heaptrack, and hyperfine]{https://www.youtube.com/watch?v=X6Xz4CRd6kw}
+* cProfile + pstats + tuna
 
-* Memory
-  - heaptrack
+  $ cProfile
+  Lists *ncalls  tottime  percall  cumtime  percall filename:lineno* for each function
 
-** References
-- [Profiling Rust Programs with valgrind, heaptrack, and hyperfine]{https://www.youtube.com/watch?v=X6Xz4CRd6kw}
+  $ pstats
+  Python helper package for cProfile
+
+  $ Tuna
+  Pip package to visualize output of cProfile
+
+  @code bash
+  python -m cProfile -o stats.prof main.py
+  @end
+
+  OR
+
+  @code python
+  from random import randint
+  import pstats
+  import cProfile
+
+  def main():
+    a = 0
+
+    def rand_step():
+      return randint(-1,1)
+
+    for i in range(10000):
+      a += rand_step()
+
+
+  if __name__ == "__main__":
+    with cProfile.Profile() as pr:
+      main()
+
+    stats = pstats.Stats(pr)
+    stats.sort_stats(pstats.SortKey.CUMULATIVE)
+    stats.print_stats()
+    stats.dump_stats("stats.prof")
+  @end
+
+  > To visualize the output of cProfile, run `tuna stats.prof`
+
+
+* line_profiler
+
+  - Outputs: *Line #, Hits, Time, Per Hit, % Time, Line Contents* for each line in function with `@Profile` decorator.
+
+  @code bash
+  python -m line_profiler main.py
+  @end
+
+  OR
+
+  @code bash
+  kernprof -l -v main.py  
+  @end
+
+
+* Perf
+
+  - Reports system events related to your program.
+
+  @code bash
+  perf list # list available events
+  @end
+  @code bash
+  perf record COMMAND ARG1 ARG2 ...
+  @end
+  @code bash
+  perf report # report the output of `perf record`  
+  @end
+
+  - Example:
+  @code bash
+  perf record -e cache-refere
+  @end
+
+* Pycallgraph + Graphviz
+
+  - [Graphviz | AUR]{https://wiki.archlinux.org/title/Graphviz}
+
+* Heaptrack
+
+* References
+  - [Profiling Rust Programs with valgrind, heaptrack, and hyperfine]{https://www.youtube.com/watch?v=X6Xz4CRd6kw}
+  - [Profiling Rust Programs with valgrind, heaptrack, and hyperfine]{https://www.youtube.com/watch?v=X6Xz4CRd6kw}

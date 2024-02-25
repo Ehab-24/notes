@@ -56,3 +56,12 @@
 
 * Congestion control
 
+
+
+* Properties of HTTP
+  - Non-persistent HTTP
+  -- Server closes connection automatically on response
+  -- Can be made with `KeepAlive` header <- closes after a set `timeout`
+  - Stateless
+   -- Stateless by default
+   -- Use cookies for state

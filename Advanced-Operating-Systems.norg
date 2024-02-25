@@ -54,11 +54,11 @@
 ** Lecture 4
    @code c
    struct PCB {
-       int pid;
-       int state;
-       unsigned int _eax;
-       //...other cpu registers
-       int next;    // points to the next process in `pcb` list
+   int pid;
+   int state;
+   unsigned int _eax;
+   //...other cpu registers
+   int next;    // points to the next process in `pcb` list
    };
    struct PCB pcb[1024];    // static array to store context of running processes
    @end
@@ -82,6 +82,55 @@
 
 *** Questions
     ~ *What are tiers (e.g; tier 0) in terms of priveledge levels?*
+
+
+** Lecture 5 - 2024-02-13
+*** Synchronization
+    - shm
+    - critical section
+    - race conditions
+    - mutual exclusion (mutex)
+    - testandset, exchange <- machine instructions used in locks
+    - read this chapter from book
+    ---
+
+   - 󰓎 In quiz, the question was "Whats the problem with kernel threads as discussed in the paper?". I wrote "Performance". The actual answer might have been "no proper support for user threads", but that's a problem with kernel, not kernel threads. 
+
+** Lecture 6 - 2024-02-16
+   - Mutex -> both processes want to modify the same state
+   - Semaphore -> one wnats to wait until other has written something
+   - Differences between mutex and semaphore
+   -- {https://i0.wp.com/pediaa.com/wp-content/uploads/2019/06/Difference-Between-Mutex-and-Semaphore-Comparison-Summary.jpg?resize=475%2C742&ssl=1}
+   - The single similarity between mutex and semaphore
+   -- Both are atomic
+
+* Lecture 7 - 2024-02-20
+  ~ TLB
+  ~~ A solution to increased memory access time in paging
+  ~~ Stores PTEs
+  ~ Virtual to Physical Address Translation
+  ~~ Limit register (not used now)
+  ~ MMU
+  ~ DMA controller
+  ~ Paging
+  ~~ Pages vs Frames
+  ~ Every page table's size is huge (maximum size allowed by architecture)
+
+** Insights
+  - *How does address translation happen in paging?*
+  ~~ Page table lookups. The address of page table is stored in PTBR (Page Table Base Register).
+
+  - *What happens when we increase/descrease page size?*
+
+* Lecture 8 - 2024-02-23
+  ~ Page Table
+  ~ Virtual memory
+  ~ Protection bit
+
+** Insights
+   - *How is the virtual Page Address Translated to Physical Frame Address?*
+   -- ( ) Draw a diagram on draw.io
+
 
     ---
    ---
@@ -128,9 +177,9 @@ ___
     - user-level theads execute within the context of traditional processes
     - thread package sees each process as a *virtual processor*, and treats it as a physical processor executing under its control
     - each virtual processor runs user-level code that pulls threads off of ready list and runs them  
-    - in reality, these virtual processors are being multiplexed across actual physical processor by underlying kernel
 
-**** Goals
+**** Effective Kernel Support for User-Level Management of Parallelism
+    - in reality, these virtual processors are being multiplexed across actual physical processor by underlying kernel
      - in common case, where kenel intervention is not required, our threads perform essentially the same as best existing user-level threads
      - when kernel intervention is required, our system can mimic kernel thread management system:
      -- no processor idles in the presence of a ready thread
@@ -144,14 +193,15 @@ ___
     -- Kernel threads are scheduled obliviously with respect to the UT state.
     - *aspects of the abstraction:*
     -- kernel has complete control over how many processors to give each AS
-    -- each TA has complete control over which threads to run on its allocated processors
-    -- PA notifies TA whenever:
+    -- each TS has complete control over which threads to run on its allocated processors
+    -- PA notifies TS whenever:
     --- PA changes the number of assigned processors
     --- UT blocks or wakes up in the kernel (e.g; in I/O or page fault)
-    -- TA notifies kernel when it needs to change the number of assigned processors
+    -- TS notifies kernel when it needs to change the number of assigned processors
     --- notifications occur only on thread operations that can affect processsor allocation decisions
     -- interface is exaclty the same as normal kernel threads to the application programmer 
-    - each vectored causes the TA to reconsider which threads to run which processors
+
+    - each vectored causes the TS to reconsider which threads to run on which processors
     - each SA has two stacks:
     -- one mapped into the kernel
     -- one mapped into the application AS
@@ -162,7 +212,7 @@ ___
     -- shceduler activation has blocked
     -- shceduler activation has unblocked
     - there are always exactly as many running /SAs/ (vessels for running UTs) as there are processors assigned to the AS.
-    -- (?) but /*Fig I*/ shows otherwise at T2
+    -- (?) but /*Fig I*/ shows otherwise at T2 -> no it does not lol
     - when a UT is blocked in kernel or preempted, most of the state (thread stack and control block) need to resume is present in user-level, but the threads register state is saved by kernel's low-level routines (e.g; interrupt and page fault handlers). These are passed as args in the SA
     - to reallocate a processor for a new AS, the kernel:
     ~~ sends an interrupt to the processor
@@ -172,14 +222,14 @@ ___
     ~~~ does another preemption on a different processor in the old AS
     ~~~ uses it to do an upcall with a fresh SA, notifying the AS that /two/ UTs have been stopped
     ~~~ when the last processor is preempted from an AS, we delay the notification until the kernel assigns it one
-    - an additional preempion is needed if the running thread ha lower priority than ready threads
-    ~~ TS asks the kernel to preempt the low-priority threads'processor
+    - an additional preempion is needed if the running thread has lower priority than ready threads
+    ~~ TS asks the kernel to preempt the low-priority thread's processor
     ~~ kernel uses that processor to do an upcall
     ~~ TS can assign the processor to high-priority thread
     - when a preemption or page fault occurs in user-level when no UT is running: - page 12
     > Third, scheduler activations work properly...
     - a blocked thread, when resumed, may still need to execute in kernel mode. The kernel delays the upcall until the thread leaves kernel mode
-    - Topaz kernel thread management o=routines were modified to implement SA
+    - Topaz kernel thread management routines were modified to implement SA
     - *FastThreads* was modified to process upcalls, to resume interrupted critical sections and provide *Topaz* with the information needed for processor allocation decisions
 
 **** Notifying the Kernel of User-Level Events Affecting Processor Allocation
@@ -189,11 +239,11 @@ ___
      ~~ This processor is idle 
 
 **** Approach
-     - provide each  application with a /virtual multiprocessor/
+     - provide each application with a /virtual multiprocessor/
      - kernel notifies the /address space thread scheduler/ of every kernel event affecting the address space
      -- allow application to have complete knowledge of its scheduling state
      - /thread system/ of each address space notifies /kernel processor allocator/ about only those user-level thread operations that can affect processor allocation decisions
-     - /scheduler activation/ vectors control from kernel to the /when does a scheduler activation block?address space thread scheduler/, on a kernel event
+     - /scheduler activation/ vectors control from kernel to the /address space thread scheduler/, on a kernel event
 
 *** Questions
     - *whats a thread scheduler?*
