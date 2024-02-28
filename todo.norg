@@ -138,13 +138,38 @@
 * 2024-02-25
   - ( ) Debugging notes
   - (-) Profiling notes
-  - (-) [Wireguard]{/ /home/ehab/Documents/wireguard.pdf}
+  - (x) [Wireguard]{/ /home/ehab/Documents/wireguard.pdf}
   - (-) Understand server certificates and keys
   - Throughly Read: [Version Control (Git)]{https://missing.csail.mit.edu/2020/version-control/}
   - Throughly Read: [Metaprogramming]{https://missing.csail.mit.edu/2020/metaprogramming/}
   - (x) How to connect to your home router as an admin
   -- (x) [How to Connect to Your Home Router as an Administrator]{https://www.lifewire.com/accessing-your-router-at-home-818205}
-  - Setup ssh key 
-  - Coderush website: Add member2, member3 email columns in csv
+  - (x) Setup ssh key on Gitea
+  - (x) Coderush website: Add member2, member3 email columns in csv
+  - (x) Coderush website: Add CodeSeekho code
   - (x) Lecture notes
   -- (_) ToA
+
+* 2024-02-26
+  - Perform a DoS attack. 
+  - Perform a DDoS attack.
+  - (x) [Wireguard]{/ /home/ehab/Documents/wireguard.pdf}
+  - Wireguard notes
+  - Lecture notes
+
+* 2024-02-27
+  - Ask Sir:
+  -- (_) How many hrs/week are we required to be present in office
+  -- (x) Can we come to office on Sundays
+  -- (x) Macbook
+  - Pyhole
+  - (x) Coderush Marketing
+  - (x) [Wireguard]{/ /home/ehab/Documents/wireguard.pdf}
+
+* 2024-02-28
+  - Networks: certificates, keys and sessions
+  - Coderush:
+  -- Final preps for web
+  --- Rules
+  --- github classroom testing
+  - Encrypted DNS

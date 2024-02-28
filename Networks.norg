@@ -84,9 +84,6 @@
 
 
 * Lecture 5 - 2024-02-19
-
-  Content we covered:
-
   ~ {:HTTP:* Properties of HTTP}
   ~ Web caches
   -- Proxy servers
@@ -113,7 +110,8 @@
   ~ BitTorrent
   ~~ Trackers -> volunteer peers or centralized servers
   ~~ Choking/unchoking peers
-  ~~ Files are divided 256kB chunks
+  ~~ Files are divided in 256kB chunks
+  ~~ Uses file checksum for validation
 
 
 
