@@ -1,10 +1,17 @@
 
 * Insights
-
-  - 
+  - what is `modprobe` command?
+  - learn about `ufw` and how firewalls work in general
+  - learn about the linux network stack
+  -- what are iptables?
+  -- what does the config in `/etc/wireguard/wg0.conf` mean?
 
 * References
   - 󰓎 [Wireguard]{/ /home/ehab/Documents/wireguard.pdf}
   - (-) [Quickstart]{https://www.wireguard.com/quickstart/}
   - [Wireshark - WireGuard]{https://wiki.wireshark.org/WireGuard}
   - [How does wireshark recognize wireguard traffic?]{https://www.reddit.com/r/WireGuard/comments/h8bvwu/how_does_wireshark_recognize_wireguard_traffic/}
+  - 󰓎 [How to get started with WireGuard VPN]{https://upcloud.com/resources/tutorials/get-started-wireguard-vpn}
+  - [WireGuard_Setup]{https://gist.github.com/chrisswanda/88ade75fc463dcf964c6411d1e9b20f4}
+  - [Jacob’s WireGuard VPN Guide]{https://wireguard.how/}
+  - [WireGuard Endpoints and IP Addresses]{https://www.procustodibus.com/blog/2021/01/wireguard-endpoints-and-ip-addresses/}

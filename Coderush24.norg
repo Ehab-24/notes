@@ -43,7 +43,7 @@
     - ( ) need someone to take care of website's dummy content
 **** Findings
      - 
-     
+
 
 ** Management
    - send confirmation emails on successful registration
@@ -60,10 +60,13 @@
     - add social links
 
 *** Setup github classroom
-    ~ Sign into github classroom [Github Classroom - Coderush24 web]{https://classroom.github.com/classrooms/156463098-gdsc-itu-classroom-coderush}
-    ~ Create a new roster and add all participants (Team names)
-    ~ Send invite link to participants
-    - (?) Production test
+    ~ (x) Sign into github classroom [Github Classroom - Coderush24 web]{https://classroom.github.com/classrooms/156463098-gdsc-itu-classroom-coderush/assignments/coderush-24-web-hackatthon}
+    -- [See all teams]{https://github.com/orgs/GDSC-ITU/teams}
+    -- Invite code: https://classroom.github.com/a/J7ROCiTH
+    ~ (_) Create a new roster and add all participants (Team names)
+    ~ (x) Send invite link to participants
+    - (x) Production test
+
 
 *** Students
     ~ Open the shared link
@@ -103,5 +106,31 @@
     - 10 points for inter team communication/collaboration
 
 *** (-) Grading criteria
+
+
+* Evaluations
+** Metric
+
+*** Gameplay - 75 points
+**** UI/UX - 30 points
+     ~ UI design - 12 points
+     ~ Animations - 8 points
+     ~ UX - 10 points
+
+**** Core Functionality - 45 points
+***** Lobby Functionality - 12 points
+***** Core Gameplay - 25 points 
+      ~ Time-limited prompt box - 5 points
+      ~ Prompt distribution - 2 points
+      ~ Time-limited Doodle canvas - 8 points
+      ~ Doodle distribution - 5 points
+      ~ Seamless gameplay experience - 5 points
+***** Game Replay - 8 points
+
+** Side Functionality - 25 points
+   ~ Live updates - 15 points
+   -- Doodles should be able to see, in real-time, which of their fellows have submitted the prompt or doodle
+   ~ Rating system - 10 points
+   -- After each game, doodlers are asked to rate the game
 
 

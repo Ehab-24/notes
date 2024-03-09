@@ -114,6 +114,8 @@
   ~~ Uses file checksum for validation
 
 
+* Lecture ? - 2024-03-04
+  ~ Reliability in TCP
 
     ---
    ---
@@ -137,4 +139,8 @@ ___
   - *Difference between primary and secondary DNS server for a router*
 
   - [Following an HTTP GET / through Switches, Routers, Gateways, and Proxies (Detailed Examples)]{https://www.youtube.com/watch?v=98B6P_QAh68}
+  - [Network Configuration]{https://wiki.archlinux.org/title/Network_configuration}
 
+* Resources
+  - [Network and Computer Security]{https://ocw.mit.edu/courses/6-857-network-and-computer-security-spring-2014/download/}
+  - [MIT Courses]{https://ocw.mit.edu/search/?d=Electrical%20Engineering%20and%20Computer%20Science&q=network}

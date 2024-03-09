@@ -29,4 +29,6 @@
   - {:regex:}
   - {:profiling:}
   - {:WireGuard:}
+  - {:Swift:}
+  - {:Django:}
   - {:GSOC-Knative:}

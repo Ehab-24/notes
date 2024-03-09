@@ -49,7 +49,7 @@
   Just uni
 
 * 2024-02-17
-  - ( ) read about the XY problem
+  - (_) read about the XY problem
   - (-) watch: [Jordan Peterson - The Keys to Growth, Emotional Resilience & Finding Purpose | Modern Wisdom 436]{https://www.youtube.com/watch?v=laSK7Pxh0_8}
   - (x) Stoicism:
   -- (x) Watch: [Stoicism: Become Undefeatable]{https://www.youtube.com/watch?v=EFkyxzJtiv4}
@@ -89,7 +89,7 @@
   - See how to utilize absents
   - (_) Ask Saad for contact
   - (-) Understand VPNs, proxies, switches, routers etc
-  - (-) Understand wireguard
+  - (x) Understand wireguard
   - (-) Read/Watch: {:VPN:* References}
   - Watch: [Nix and NeoVim]{https://www.youtube.com/watch?v=T58Yr5igNGk}
   - Security profiles and iptables to control firewall settings
@@ -106,7 +106,7 @@
 * 2024-02-21
   - (x) Fly through *Missing Semester Course* {https://missing.csail.mit.edu/}
   - (x) Reply Zain Razzaq's questions
-  -- (-) Also add to website
+  -- (x) Also add to website
   - (x) Registrations to CSV download button
   - (x) Add approve/cancel buttons to {https://gdsc-admin.vercel.app}
   - (x) Remove delete application button
@@ -154,7 +154,7 @@
   - Perform a DoS attack. 
   - Perform a DDoS attack.
   - (x) [Wireguard]{/ /home/ehab/Documents/wireguard.pdf}
-  - Wireguard notes
+  - (x) Wireguard notes
   - Lecture notes
 
 * 2024-02-27
@@ -162,14 +162,75 @@
   -- (_) How many hrs/week are we required to be present in office
   -- (x) Can we come to office on Sundays
   -- (x) Macbook
-  - Pyhole
   - (x) Coderush Marketing
   - (x) [Wireguard]{/ /home/ehab/Documents/wireguard.pdf}
 
 * 2024-02-28
   - Networks: certificates, keys and sessions
-  - Coderush:
-  -- Final preps for web
-  --- Rules
-  --- github classroom testing
+  - (x) Coderush:
+  -- (x) Final preps for web
+  --- (x) Rules
+  --- (x) test github classroom
   - Encrypted DNS
+  - (-) Stanford University | Swift course
+  -- (x) Lecture 1
+  -- (x) Lecture 2
+  -- (x) Lecture 3
+  -- (x) Lecture 4
+  -- (x) Lecture 5
+  -- (x) Lecture 6
+  -- (x) Lecture 7
+  -- (x) Lecture 8
+  -- (x) Lecture 9
+  -- (x) Lecture 10
+  -- (x) Lecture 11
+  -- (x) Lecture 12
+  -- ( ) Lecture 13
+  -- ( ) Lecture 14
+  -- ( ) Lecture 15
+
+* 2024-03-04
+  ~ (x) Wireguard notes
+  ~ (-) Wireguard go
+  ~ (x) How to integrate iOS into wireguard
+  ~~ (x) wireguard iOS app
+  ~ ( ) swift internals
+  ~ (-) swift concurrency
+  ~ (x) PDC ASM01
+  ~ Lecture notes
+  ~ (-) Docker
+  ~~ (-) How does docker port forwarding work?
+  ~~ (-) Setup an example
+
+* 2024-03-05
+  ~ (-) dns-logger
+  ~~ (x) insights and improvements
+  ~~ (x) implementation
+  ~~ (_) Optimization
+  ~ (x) wireguard
+  ~~ (x) read Saad's notes
+  ~~ (x) complete personal notes (shift to HackMD)
+  ~ (x) download WG app:
+  ~~ (x) iOS
+  ~~ (_) macOS
+  ~ (x) Follow wireguard.How tutorials
+  ~ (-) connect WG peers and analyze network traffic
+  ~ (x) connect to server with macOS app, iOS app
+  -- macOS app is not supported on versions lower than 12
+
+* 2024-03-07
+  ~ (x) Networks ASM02
+  ~ (x) DNS Logger Implementation
+  ~ (x) Find a better documentaiton tool that Google Docs --> BookStack
+
+* 2024-03-09
+  ~ ( ) ToA ASM01
+  ~ PDC ASM01 in Django
+  ~ DNS logger unit tests
+  ~ (-) Start Android Development
+  ~~ (-) Setup android studio
+  ~~ ( ) Learn kotlin
+  ~ Learn about Pi-hole
+  ~ Learn about Tor
+  ~ Learn distributed load balancing
+
